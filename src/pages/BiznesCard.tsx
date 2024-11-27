@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Water } from '../components/Water/Water';
 
 const ASCII = {
   topLeft: '┌',
@@ -87,7 +88,7 @@ export const BiznesCard = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white"
+      className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white relative"
     >
       <div className="flex flex-col items-center space-y-8 p-8">
         {/* Business card with double-line border */}
@@ -135,6 +136,7 @@ export const BiznesCard = () => {
           ))}
         </div>
       </div>
+      <Water />
     </motion.div>
   );
 };

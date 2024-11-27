@@ -46,6 +46,23 @@ export const NowPlaying = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const formatTrackText = (name: string, artist: string) => {
+    const fullText = `${name} - ${artist}`;
+    const lines = fullText.match(/.{1,50}/g) || [fullText]; // Split into chunks of ~50 chars
+    
+    if (lines.length === 1) {
+      return `[${fullText}]`;
+    }
+    
+    return lines.map((line, index) => {
+      // Trim whitespace and add brackets
+      line = line.trim();
+      // Add space at the start for all lines except the first
+      const prefix = index === 0 ? '[' : ' [';
+      return `${prefix}${line}]`;
+    }).join('\n');
+  };
+
   return (
     <div className="fixed top-4 right-4 text-white font-mono z-[100] p-2 rounded max-w-[800px]">
       {error ? (
@@ -53,7 +70,7 @@ export const NowPlaying = () => {
       ) : !lastTrack ? (
         'Loading...'
       ) : (
-        <div className="flex flex-row flex-wrap items-center justify-end gap-x-2">
+        <div className="flex flex-col items-end gap-y-2">
           <div className="whitespace-nowrap">Jam JUST listened to</div>
           <a 
             href={SPOTIFY_PROFILE}

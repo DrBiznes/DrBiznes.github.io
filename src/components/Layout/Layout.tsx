@@ -30,7 +30,9 @@ export const Layout = () => {
         <Outlet />
       </main>
 
-      <NowPlaying />
+      <div className="fixed bottom-0 left-0 z-30">
+        <NowPlaying />
+      </div>
     </div>
   );
 };
