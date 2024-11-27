@@ -12,6 +12,15 @@ const ASCII = {
   teeLeft: '┤'
 };
 
+const BORDER = {
+  topLeft: '╔',
+  topRight: '╗',
+  bottomLeft: '╚',
+  bottomRight: '╝',
+  horizontal: '═',
+  vertical: '║'
+};
+
 interface SocialLink {
   platform: string;
   username: string;
@@ -26,36 +35,49 @@ const socialLinks: SocialLink[] = [
   { platform: 'Email', username: 'contact@jamino.dev', url: 'mailto:contact@jamino.dev' }
 ];
 
-const drawBox = (title: string, content: (string | JSX.Element)[]) => {
+const drawBox = (title: string, content: string[]) => {
+  const maxWidth = 60;
+  const processedContents: string[] = [];
+  
+  content.forEach((line) => {
+    processedContents.push(line);
+  });
+
+  const contentWidth = maxWidth + 4;
+  
+  const drawLine = (start: string, middle: string, end: string) => {
+    return `${start}${middle.repeat(contentWidth)}${end}`;
+  };
+
+  const drawContentLine = (content: string) => {
+    return `${ASCII.vertical} ${content.padEnd(contentWidth - 2)} ${ASCII.vertical}`;
+  };
+
+  return [
+    drawLine(ASCII.topLeft, ASCII.horizontal, ASCII.topRight),
+    drawContentLine(title),
+    drawLine(ASCII.teeRight, ASCII.horizontal, ASCII.teeLeft),
+    ...processedContents.map(content => drawContentLine(content)),
+    drawLine(ASCII.bottomLeft, ASCII.horizontal, ASCII.bottomRight)
+  ].join('\n');
+};
+
+const drawBusinessCard = (content: string[]) => {
   const width = 76;
   
-  const topLines = [
-    `${ASCII.topLeft}${ASCII.horizontal.repeat(width)}${ASCII.topRight}`,
-    `${ASCII.vertical} ${title.padEnd(width - 2)} ${ASCII.vertical}`,
-    `${ASCII.teeRight}${ASCII.horizontal.repeat(width)}${ASCII.teeLeft}`,
-  ];
-
-  const bottomLines = [
-    `${ASCII.bottomLeft}${ASCII.horizontal.repeat(width)}${ASCII.bottomRight}`
-  ];
+  const topLine = `${BORDER.topLeft}${BORDER.horizontal.repeat(width)}${BORDER.topRight}`;
+  const bottomLine = `${BORDER.bottomLeft}${BORDER.horizontal.repeat(width)}${BORDER.bottomRight}`;
 
   return (
-    <>
-      {topLines.map((line, i) => <div key={`top-${i}`}>{line}</div>)}
+    <div className="font-mono">
+      <pre>{topLine}</pre>
       {content.map((line, i) => (
-        <div key={`content-${i}`} className="flex">
-          <span>{ASCII.vertical}</span>
-          <div className="flex-1 px-2">
-            {typeof line === 'string' ? 
-              <span>{line.padEnd(width - 2)}</span> : 
-              line
-            }
-          </div>
-          <span>{ASCII.vertical}</span>
-        </div>
+        <pre key={i}>
+          {BORDER.vertical} {line.padEnd(width - 2)} {BORDER.vertical}
+        </pre>
       ))}
-      {bottomLines.map((line, i) => <div key={`bottom-${i}`}>{line}</div>)}
-    </>
+      <pre>{bottomLine}</pre>
+    </div>
   );
 };
 
@@ -68,13 +90,10 @@ export const BiznesCard = () => {
       className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white"
     >
       <div className="flex flex-col items-center space-y-8 p-8">
-        {/* JAMINO box with wider container */}
+        {/* Business card with double-line border */}
         <div className="whitespace-pre text-left w-[800px]">
-          {drawBox('Biznes Card`', [
-            <div key="line1" className="flex justify-between w-full">
-              <span className="text-6xl font-bold drop-shadow-[0_2px_4px_rgba(128,0,128,0.5)]">TR</span>
-              <span>James P. Femino</span>
-            </div>,
+          {drawBusinessCard([
+            'TR                                                     James P. Femino',
             '                                                          Treasurer',
             '',
             '',
@@ -85,19 +104,21 @@ export const BiznesCard = () => {
           ])}
         </div>
 
-        {/* I Know NOTHING box with original width */}
+        {/* Original ASCII box for the poem */}
         <div className="whitespace-pre text-left w-[500px]">
-          {drawBox('I Know NOTHING', [
-            'God, once more I sit and wait,',
-            'While Maven spins my mental state,',
-            'These dependencies cascade,',
-            'Like choices that I shouldn\'t have made.',
-            '',
-            'Each error cryptic as can be,',
-            'Stack traces to infinity,',
-            'NullPointerException hell,',
-            'Which line? Only God can tell.'
-          ])}
+          <pre>
+            {drawBox('I Know NOTHING', [
+              'God, once more I sit and wait,',
+              'While Maven spins my mental state,',
+              'These dependencies cascade,',
+              'Like choices that I shouldn\'t have made.',
+              '',
+              'Each error cryptic as can be,',
+              'Stack traces to infinity,',
+              'NullPointerException hell,',
+              'Which line? Only God can tell.'
+            ])}
+          </pre>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 w-full mt-4">
