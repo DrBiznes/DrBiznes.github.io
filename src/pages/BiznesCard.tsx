@@ -101,7 +101,7 @@ export const BiznesCard = () => {
             '',
             '                                        Thunderegg Records, Non Profit',
             '                                                   Eugene, Oregon',
-            '                                         University of Oregon Campus'
+            '                                   One of the worlds top 3 problem solvers'
           ])}
         </div>
 
