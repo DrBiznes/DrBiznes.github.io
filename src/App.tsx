@@ -1,25 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Layout } from './components/Layout/Layout';
+import { Home } from './pages/Home';
+import { ModPage } from './pages/ModPage';
+import { TransitDatabase } from './pages/TransitDatabase';
+import { BiznesCard } from './pages/BiznesCard';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/minecraft-mods/:modId" element={<ModPage />} />
+          <Route path="/transit-database" element={<TransitDatabase />} />
+          <Route path="/biznes-card" element={<BiznesCard />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 

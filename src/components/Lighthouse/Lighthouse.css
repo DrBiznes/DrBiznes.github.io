@@ -1,0 +1,41 @@
+.lighthouse-scene {
+  position: fixed;
+  bottom: -78px;
+  right: 0;
+  height: 800px;
+  width: 800px;
+  pointer-events: none;
+}
+
+.lighthouse {
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+  color: #ffffff;
+  font-size: 10px;
+  white-space: pre;
+  text-align: center;
+  line-height: 1;
+}
+
+.light-beam {
+  position: absolute;
+  top: 70px;
+  left: 53%;
+  width: 150px;
+  height: 15px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), transparent);
+  transform-origin: left;
+  animation: rotate 4s linear infinite;
+  transform: perspective(500px) rotateY(0deg);
+  margin-left: -3px;
+}
+
+@keyframes rotate {
+  from {
+    transform: perspective(500px) rotateY(0deg);
+  }
+  to {
+    transform: perspective(500px) rotateY(360deg);
+  }
+}
