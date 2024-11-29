@@ -1,0 +1,37 @@
+.moon-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1;
+  white-space: pre;
+  z-index: 20;
+  pointer-events: none;
+}
+
+.moon-ascii {
+  opacity: 0.8;
+}
+
+.twinkling-star {
+  display: inline-block;
+}
+
+.twinkling-star:matches(*) {
+  transition: opacity 1.2s ease-in-out;
+}
+
+.twinkling-star:matches(o) {
+  transition: opacity 1.8s ease-in-out;
+}
+
+.twinkling-star:matches(-O-) {
+  transition: opacity 2.4s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .moon-container {
+    display: none;
+  }
+} 

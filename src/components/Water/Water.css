@@ -1,0 +1,63 @@
+.water-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+    overflow: hidden;
+    z-index: 5;
+  }
+  
+  .water-animation {
+    color: rgba(100, 149, 237, 0.5);
+    font-size: 14px;
+    line-height: 1.2;
+    white-space: pre;
+  }
+  
+  .wave-1 {
+    animation: waveMotion1 8s linear infinite,
+               waveFloat1 3s ease-in-out infinite;
+  }
+  
+  .wave-2 {
+    animation: waveMotion2 8s linear infinite,
+               waveFloat2 3s ease-in-out infinite;
+  }
+  
+  /* First wave animations */
+  @keyframes waveMotion1 {
+    0% {
+      transform: translateX(0%);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  @keyframes waveFloat1 {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(4px);
+    }
+  }
+  
+  /* Second wave animations (slightly offset) */
+  @keyframes waveMotion2 {
+    0% {
+      transform: translateX(-50%);
+    }
+    100% {
+      transform: translateX(0%);
+    }
+  }
+  
+  @keyframes waveFloat2 {
+    0%, 100% {
+      transform: translateY(4px);
+    }
+    50% {
+      transform: translateY(0);
+    }
+  }
