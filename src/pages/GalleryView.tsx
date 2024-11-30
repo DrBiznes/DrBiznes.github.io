@@ -1,21 +1,22 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { photoGalleries } from '../config/photos';
+import { useParams, useNavigate, Navigate, useSearchParams } from 'react-router-dom';
 import LightGallery from 'lightgallery/react';
 import 'lightgallery/css/lightgallery.css';
 import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
+import { photoGalleries } from '../config/photos';
 
 export const GalleryView = () => {
   const { galleryId, setId } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [isClosing, setIsClosing] = useState(false);
 
   const gallery = galleryId ? photoGalleries[galleryId] : undefined;
   const photoSet = gallery?.photoSets.find(set => set.folderId.split('/').pop() === setId);
+  const initialPhotoIndex = parseInt(searchParams.get('photoIndex') || '0');
 
   if (!gallery || !photoSet) {
     return <Navigate to="/404" replace />;
@@ -30,12 +31,7 @@ export const GalleryView = () => {
 
   return (
     <div className="fixed inset-0 bg-black">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="relative h-full w-full"
-      >
+      <div className="relative h-full w-full">
         {/* LightGallery container */}
         <div className="relative h-full w-full z-[1000]">
           <LightGallery
@@ -46,7 +42,7 @@ export const GalleryView = () => {
             autoplayFirstVideo={false}
             onInit={(detail) => {
               setTimeout(() => {
-                detail.instance.openGallery();
+                detail.instance.openGallery(initialPhotoIndex);
               }, 100);
             }}
             onBeforeClose={() => {
@@ -75,7 +71,7 @@ export const GalleryView = () => {
             ))}
           </LightGallery>
         </div>
-      </motion.div>
+      </div>
 
       <style>
         {`

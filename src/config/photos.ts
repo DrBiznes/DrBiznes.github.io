@@ -54,7 +54,6 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           }
         ],
         allPhotos: [
-          // Including all preview photos in the allPhotos array
           {
             imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
             title: 'Valley View',
@@ -76,6 +75,56 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             description: 'A breathtaking sunset over the rugged landscape'
           }
         ]
+      },
+      {
+        id: 'yosemite',
+        folderId: 'national-parks/yosemite',
+        title: 'Yosemite National Park',
+        description: 'Majestic granite cliffs, waterfalls, and scenic vistas captured during Summer 2024',
+        photos: [
+          {
+            imageUrl: '/photos/national-parks/yosemite/half-dome.jpeg',
+            title: 'Half Dome at Sunset',
+            description: 'The iconic Half Dome glowing in the golden evening light'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/yosemite-falls.jpeg',
+            title: 'Yosemite Falls',
+            description: 'The magnificent Yosemite Falls in full summer flow'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/tunnel-view.jpeg',
+            title: 'Tunnel View Vista',
+            description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/meadow-wildflowers.jpeg',
+            title: 'Valley Meadow',
+            description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
+          }
+        ],
+        allPhotos: [
+          {
+            imageUrl: '/photos/national-parks/yosemite/half-dome.jpeg',
+            title: 'Half Dome at Sunset',
+            description: 'The iconic Half Dome glowing in the golden evening light'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/yosemite-falls.jpeg',
+            title: 'Yosemite Falls',
+            description: 'The magnificent Yosemite Falls in full summer flow'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/tunnel-view.jpeg',
+            title: 'Tunnel View Vista',
+            description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/meadow-wildflowers.jpeg',
+            title: 'Valley Meadow',
+            description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
+          }
+        ]
       }
     ]
   }
@@ -85,20 +134,28 @@ export const photoGalleries: Record<string, PhotoGallery> = {
   To expand the gallery using the four-photo system:
   1. Add a new PhotoSet object to the `photoSets` array within the desired gallery.
   2. Each PhotoSet should contain:
-     - A `title` for the set.
-     - A `description` for the set.
-     - A `folderId` to identify the complete photo collection.
-     - An array of `photos` for the preview (exactly 4 photos), each with:
-       - `imageUrl`: Path to the image.
-       - `title`: Title of the photo.
-       - `description`: Description of the photo.
-     - An array of `allPhotos` containing all photos in the folder.
-  3. Ensure each preview set contains exactly four photos for consistent layout.
-  4. Add additional galleries by creating new entries in the `photoGalleries` object.
+     - A `title` for the set
+     - A `description` for the set
+     - A `folderId` to identify the complete photo collection
+     - An array of `photos` for the preview (exactly 4 photos)
+     - An array of `allPhotos` containing all photos for the gallery view
+  3. Each photo (in both arrays) must have:
+     - `imageUrl`: Path to the image
+     - `title`: Title of the photo
+     - `description`: Description of the photo
+  4. The `photos` array must contain exactly four photos for consistent layout
+  5. The `allPhotos` array can contain any number of photos and is used by the gallery view
+  6. Add additional galleries by creating new entries in the `photoGalleries` object
   
+  Photo Array Usage:
+  - `photos`: Used for the preview grid on the main photos page (must be exactly 4 photos)
+  - `allPhotos`: Used for the full-screen gallery view, can contain all photos in the set
+    including ones not shown in the preview. This allows for a larger collection to be
+    viewed in the gallery while maintaining a consistent preview layout.
+
   To add multiple photo sets to one page:
-  - Simply add multiple PhotoSet objects to the `photoSets` array.
-  - Each set will be displayed vertically on the page in the order they appear in the array.
+  - Simply add multiple PhotoSet objects to the `photoSets` array
+  - Each set will be displayed vertically on the page in the order they appear in the array
   Example:
     photoSets: [
       { first set of 4 photos... },

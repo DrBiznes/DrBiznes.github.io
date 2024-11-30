@@ -90,32 +90,16 @@ const PhotoSet = ({
     return hoveredIndex === index ? 50 : positions[index].wrapperStyle.zIndex;
   };
 
-  const handleClick = () => {
+  const handleClick = (clickedPhotoIndex: number) => {
     const setId = folderData.folderId.split('/').pop();
-    navigate(`/photos/${galleryId}/${setId}/gallery`);
+    navigate(`/photos/${galleryId}/${setId}/gallery?photoIndex=${clickedPhotoIndex}`);
   };
 
   const drawBox = (title: string, content: string[], isCenter: boolean = false) => {
     const maxWidth = isCenter ? 80 : 40;
-    const processedContents = content.flatMap(text => {
-      const words = text.split(' ');
-      const lines: string[] = [];
-      let currentLine = '';
-
-      words.forEach(word => {
-        if ((currentLine + ' ' + word).length <= maxWidth) {
-          currentLine = currentLine ? `${currentLine} ${word}` : word;
-        } else {
-          lines.push(currentLine);
-          currentLine = word;
-        }
-      });
-      if (currentLine) lines.push(currentLine);
-      return lines;
-    });
-
+    
     return (
-      <div className="text-white font-mono whitespace-pre break-words">
+      <div className="text-white font-mono whitespace-pre-wrap break-words max-w-full overflow-hidden">
         {title && (
           <div className="mb-2">
             {`${ASCII.topLeft}${ASCII.horizontal.repeat(Math.min(title.length + 2, maxWidth))}${ASCII.topRight}`}
@@ -123,9 +107,9 @@ const PhotoSet = ({
             {`${ASCII.bottomLeft}${ASCII.horizontal.repeat(Math.min(title.length + 2, maxWidth))}${ASCII.bottomRight}`}
           </div>
         )}
-        {processedContents.map((line, index) => (
-          <div key={index} className="opacity-80">
-            {line}
+        {content.map((text, index) => (
+          <div key={index} className="opacity-80" style={{ maxWidth: `${maxWidth}ch` }}>
+            {text}
           </div>
         ))}
       </div>
@@ -147,7 +131,7 @@ const PhotoSet = ({
               <div className="bg-white/10 px-3 py-1.5 border-b border-white">
                 <span className="text-lg">{title}</span>
               </div>
-              <div className="p-4">
+              <div className="p-4 max-w-full">
                 {drawBox('', [description], true)}
               </div>
             </div>
@@ -181,7 +165,7 @@ const PhotoSet = ({
                   rotate: 0,
                   transition: { duration: 0.3 }
                 }}
-                onClick={handleClick}
+                onClick={() => handleClick(index)}
               >
                 <div className="relative">
                   <img

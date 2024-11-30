@@ -6,6 +6,7 @@ import { TransitDatabase } from './pages/TransitDatabase';
 import { BiznesCard } from './pages/BiznesCard';
 import { PhotosPage } from './pages/PhotosPage';
 import { GalleryView } from './pages/GalleryView';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/biznes-card" element={<BiznesCard />} />
           <Route path="/photos/:galleryId" element={<PhotosPage />} />
           <Route path="/photos/:galleryId/:setId/gallery" element={<GalleryView />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>
