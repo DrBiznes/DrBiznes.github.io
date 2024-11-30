@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { photoGalleries } from '../config/photos';
+import LightGallery from 'lightgallery/react';
+import 'lightgallery/css/lightgallery.css';
+import 'lightgallery/css/lg-zoom.css';
+import 'lightgallery/css/lg-thumbnail.css';
+import lgThumbnail from 'lightgallery/plugins/thumbnail';
+import lgZoom from 'lightgallery/plugins/zoom';
 
 interface PhotoItem {
   imageUrl: string;
   title: string;
   description: string;
+}
+
+interface FolderData {
+  folderId: string;
+  photos: PhotoItem[];
 }
 
 const ASCII = {
@@ -20,22 +31,24 @@ const ASCII = {
   teeLeft: '┤'
 };
 
-const PhotoSet: React.FC<{ 
+const PhotoSet = ({ 
+  photos,
+  title,
+  description,
+  setIndex,
+  folderData,
+  lightGalleryRef
+}: { 
   photos: PhotoItem[]; 
   title: string; 
   description: string;
   setIndex: number;
-}> = ({
-  photos,
-  title,
-  description,
-  setIndex
+  folderData: FolderData;
+  lightGalleryRef: React.RefObject<any>;
 }) => {
-  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isHoveringAnyPhoto, setIsHoveringAnyPhoto] = useState(false);
 
-  // Define positions directly for each photo
   const positions = [
     {
       wrapperStyle: {
@@ -80,7 +93,14 @@ const PhotoSet: React.FC<{
   ];
 
   const getZIndex = (index: number) => {
-    return hoveredIndex === index ? 50 : 2;
+    return hoveredIndex === index ? 50 : positions[index].wrapperStyle.zIndex;
+  };
+
+  const handleClick = (index: number) => {
+    if (lightGalleryRef.current) {
+      const startIndex = setIndex * 4 + index;
+      lightGalleryRef.current.openGallery(startIndex);
+    }
   };
 
   const drawBox = (title: string, content: string[], isCenter: boolean = false) => {
@@ -122,7 +142,6 @@ const PhotoSet: React.FC<{
 
   return (
     <div className="relative h-screen overflow-hidden" style={{ marginLeft: '250px' }}>
-      {/* Center Description Box */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: isHoveringAnyPhoto ? 0 : 1 }}
@@ -139,7 +158,6 @@ const PhotoSet: React.FC<{
         </div>
       </motion.div>
 
-      {/* Photos */}
       {photos.map((photo, index) => (
         <motion.div
           key={index}
@@ -167,7 +185,7 @@ const PhotoSet: React.FC<{
               rotate: 0,
               transition: { duration: 0.3 }
             }}
-            onClick={() => setSelectedPhoto(index)}
+            onClick={() => handleClick(index)}
           >
             <div className="relative">
               <img
@@ -193,35 +211,6 @@ const PhotoSet: React.FC<{
           </motion.div>
         </motion.div>
       ))}
-
-      {/* Fullscreen View */}
-      <AnimatePresence>
-        {selectedPhoto !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
-            onClick={() => setSelectedPhoto(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              className="relative max-w-[90vw] max-h-[90vh]"
-            >
-              <img
-                src={photos[selectedPhoto].imageUrl}
-                alt={photos[selectedPhoto].title}
-                className="max-w-full max-h-[90vh] border-4 border-white shadow-2xl"
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-4 bg-black/80">
-                {drawBox(photos[selectedPhoto].title, [photos[selectedPhoto].description], false)}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
@@ -229,18 +218,61 @@ const PhotoSet: React.FC<{
 export const PhotosPage = () => {
   const { galleryId } = useParams();
   const gallery = galleryId ? photoGalleries[galleryId] : undefined;
+  const lightGalleryRef = useRef<any>(null);
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+  const onInit = (detail: any) => {
+    lightGalleryRef.current = detail.instance;
+    console.log('lightGallery has been initialized');
+  };
+
+  const onBeforeOpen = () => {
+    setIsGalleryOpen(true);
+  };
+
+  const onClose = () => {
+    setIsGalleryOpen(false);
+  };
 
   if (!gallery) {
     return <Navigate to="/404" replace />;
   }
+
+  const allPhotos = gallery.photoSets.flatMap(set => set.allPhotos);
 
   return (
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="relative min-h-screen w-full overflow-y-auto font-mono"
+      className={`relative min-h-screen w-full overflow-y-auto font-mono ${isGalleryOpen ? 'invisible' : ''}`}
     >
+      <div style={{ display: 'none' }}>
+        <LightGallery
+          speed={500}
+          plugins={[lgThumbnail, lgZoom]}
+          mode="lg-fade"
+          onInit={onInit}
+          onBeforeOpen={onBeforeOpen}
+          onAfterClose={onClose}
+        >
+          {allPhotos.map((photo, index) => (
+            <a
+              key={index}
+              className="gallery-item"
+              href={photo.imageUrl}
+              data-sub-html={`<h4>${photo.title}</h4><p>${photo.description}</p>`}
+            >
+              <img 
+                alt={photo.title} 
+                src={photo.imageUrl} 
+                style={{ display: 'none' }}
+              />
+            </a>
+          ))}
+        </LightGallery>
+      </div>
+
       {gallery.photoSets.map((set, index) => (
         <PhotoSet
           key={index}
@@ -248,6 +280,8 @@ export const PhotosPage = () => {
           title={set.title}
           description={set.description}
           photos={set.photos}
+          folderData={{ folderId: set.folderId, photos: set.allPhotos }}
+          lightGalleryRef={lightGalleryRef}
         />
       ))}
     </motion.div>
