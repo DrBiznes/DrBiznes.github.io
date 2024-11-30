@@ -24,26 +24,26 @@ export const photoGalleries: Record<string, PhotoGallery> = {
     description: 'A collection of photographs from various National Parks across the United States',
     photoSets: [
       {
-        title: 'Denali National Park',
-        description: 'Summer expedition through Alaska\'s crown jewel',
+        title: 'Katmai National Park',
+        description: 'BEARS BEARS BEARS BEARS BEARS',
         photos: [
           {
-            imageUrl: '/photos/denali/valley-view.jpg',
+            imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
             title: 'Valley View',
             description: 'Expansive valley view with Mount McKinley in the background'
           },
           {
-            imageUrl: '/photos/denali/lake.jpg',
+            imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
             title: 'Serene Lake',
             description: 'A tranquil lake reflecting the surrounding mountains'
           },
           {
-            imageUrl: '/photos/denali/wildlife.jpg',
+            imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
             title: 'Wildlife',
             description: 'A glimpse of the diverse wildlife in the park'
           },
           {
-            imageUrl: '/photos/denali/sunset.jpg',
+            imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
             title: 'Sunset Vista',
             description: 'A breathtaking sunset over the rugged landscape'
           }
