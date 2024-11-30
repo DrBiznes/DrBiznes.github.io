@@ -8,6 +8,7 @@ import { NowPlaying } from '../NowPlaying/NowPlaying';
 export const Layout = () => {
   const location = useLocation();
   const isPhotosPage = location.pathname.includes('/photos');
+  const isGalleryViewPage = location.pathname.includes('/gallery');
   
   return (
     <div className="relative min-h-screen bg-[#1A1A1A] overflow-hidden">
@@ -15,9 +16,11 @@ export const Layout = () => {
         <Stars />
       </div>
       
-      <div className="fixed top-0 right-[15%] z-10">
-        <Moon />
-      </div>
+      {!isGalleryViewPage && (
+        <div className="fixed top-0 right-[15%] z-10">
+          <Moon />
+        </div>
+      )}
       
       {!isPhotosPage && (
         <div className="fixed bottom-0 right-0 z-10">
@@ -29,13 +32,17 @@ export const Layout = () => {
         <Outlet />
       </main>
 
-      <div className="fixed bottom-0 left-0 z-30">
-        <NowPlaying />
-      </div>
+      {!isGalleryViewPage && (
+        <>
+          <div className="fixed bottom-0 left-0 z-30">
+            <NowPlaying />
+          </div>
 
-      <div className="fixed top-1/2 -translate-y-1/2 left-[8%] z-50">
-        <NavigationMenu />
-      </div>
+          <div className="fixed top-1/2 -translate-y-1/2 left-[8%] z-50">
+            <NavigationMenu />
+          </div>
+        </>
+      )}
     </div>
   );
 };

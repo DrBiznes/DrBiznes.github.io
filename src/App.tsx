@@ -5,6 +5,7 @@ import { ModPage } from './pages/ModPage';
 import { TransitDatabase } from './pages/TransitDatabase';
 import { BiznesCard } from './pages/BiznesCard';
 import { PhotosPage } from './pages/PhotosPage';
+import { GalleryView } from './pages/GalleryView';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/transit-database" element={<TransitDatabase />} />
           <Route path="/biznes-card" element={<BiznesCard />} />
           <Route path="/photos/:galleryId" element={<PhotosPage />} />
+          <Route path="/photos/:galleryId/:setId/gallery" element={<GalleryView />} />
         </Route>
       </Routes>
     </BrowserRouter>
