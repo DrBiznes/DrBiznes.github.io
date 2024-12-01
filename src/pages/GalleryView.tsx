@@ -66,12 +66,23 @@ export const GalleryView = () => {
               <a
                 key={index}
                 className="gallery-item"
-                data-src={photo.imageUrl}
-                data-video={photo.type === 'video' ? '{"source": [{"src": "' + photo.imageUrl + '", "type":"video/mp4"}]}' : undefined}
+                data-src={photo.type === 'video' ? undefined : photo.imageUrl}
+                data-video={photo.type === 'video' ? JSON.stringify({
+                  source: [{
+                    src: photo.imageUrl,
+                    type: 'video/mp4'
+                  }],
+                  attributes: {
+                    preload: false,
+                    controls: true,
+                    poster: photo.thumbnailUrl
+                  }
+                }) : undefined}
+                data-thumb={photo.type === 'video' ? photo.thumbnailUrl : photo.imageUrl}
                 data-sub-html={`<h4>${photo.title}</h4><p>${photo.description || ''}</p>`}
               >
                 {photo.type === 'video' ? (
-                  <video className="hidden">
+                  <video className="hidden" poster={photo.thumbnailUrl}>
                     <source src={photo.imageUrl} type="video/mp4" />
                   </video>
                 ) : (

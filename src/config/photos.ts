@@ -3,6 +3,7 @@ export interface PhotoItem {
   title: string;
   description?: string;
   type?: 'image' | 'video';
+  thumbnailUrl?: string;
 }
 
 interface PhotoSet {
@@ -81,9 +82,10 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             "title": "No Sudden Moves One",
           },
           {
-            "imageUrl": "/photos/national-parks/katmai/NoSuddenMovesTwo.MOV",
+            "imageUrl": "/photos/national-parks/katmai/NoSuddenMovesTwo.MP4",
             "type": "video",
             "title": "No Sudden Moves Two",
+            "thumbnailUrl": "/photos/national-parks/katmai/NoSuddenMovesOne.JPEG"
           },
           {
             "imageUrl": "/photos/national-parks/katmai/NobleBear.JPEG",
@@ -93,7 +95,7 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           {
             "imageUrl": "/photos/national-parks/katmai/TenthousandSmokes.JPEG",
             "type": "image",
-            "title": "Tenthousand Smokes",
+            "title": "Ten Thousand Smokes",
           },
           {
             "imageUrl": "/photos/national-parks/katmai/TheShow.JPEG",
