@@ -32,26 +32,26 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         id: 'katmai',
         folderId: 'national-parks/katmai',
         title: 'Katmai National Park',
-        description: 'BEARS BEARS BEARS BEARS BEARS',
+        description: 'Click on any of the photos to view the whole gallery. Very first time entering the lottery for Katmai and we got in. We were so excited. We had no idea what we were getting into. We were not prepared for the bears. We were not prepared for the bears. We were not prepared for the bears.',
         photos: [
           {
             imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
-            title: 'Valley View',
-            description: 'Expansive valley view with Mount McKinley in the background'
+            title: 'Noble Bear',
+            description: 'Noble bear is a big bear. He is a good bear. He is a noble bear. Look at him stand on that rock.'
           },
           {
             imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
-            title: 'Serene Lake',
+            title: 'Iditarod',
             description: 'A tranquil lake reflecting the surrounding mountains'
           },
           {
             imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
-            title: 'Wildlife',
-            description: 'A glimpse of the diverse wildlife in the park'
+            title: 'Backwards Bear',
+            description: 'Stupid idiot bear doesn\'t realize he\'s facing the wrong way. The fish are on the other side dummy.'
           },
           {
             imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
-            title: 'Sunset Vista',
+            title: 'Ten Thousand Smokes',
             description: 'A breathtaking sunset over the rugged landscape'
           }
         ],
@@ -64,7 +64,7 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           {
             "imageUrl": "/photos/national-parks/katmai/CoolestNameForAValley.JPEG",
             "type": "image",
-            "title": "Coolest Name Fora Valley",
+            "title": "Coolest Name For a Valley",
           },
           {
             "imageUrl": "/photos/national-parks/katmai/Iditarod.JPEG",
@@ -115,52 +115,102 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         ]        
       },
       {
-        id: 'yosemite',
-        folderId: 'national-parks/yosemite',
-        title: 'Yosemite National Park',
+        id: 'yosemite-summer-2024',
+        folderId: 'national-parks/yosemite/summer-2024',
+        title: 'Yosemite Summer 2024',
         description: 'Majestic granite cliffs, waterfalls, and scenic vistas captured during Summer 2024',
         photos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/half-dome.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/half-dome.jpeg',
             title: 'Half Dome at Sunset',
             description: 'The iconic Half Dome glowing in the golden evening light'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/yosemite-falls.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/yosemite-falls.jpeg',
             title: 'Yosemite Falls',
             description: 'The magnificent Yosemite Falls in full summer flow'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/tunnel-view.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/tunnel-view.jpeg',
             title: 'Tunnel View Vista',
             description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/meadow-wildflowers.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/meadow-wildflowers.jpeg',
             title: 'Valley Meadow',
             description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
           }
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/half-dome.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/half-dome.jpeg',
             title: 'Half Dome at Sunset',
             description: 'The iconic Half Dome glowing in the golden evening light'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/yosemite-falls.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/yosemite-falls.jpeg',
             title: 'Yosemite Falls',
             description: 'The magnificent Yosemite Falls in full summer flow'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/tunnel-view.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/tunnel-view.jpeg',
             title: 'Tunnel View Vista',
             description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/meadow-wildflowers.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/meadow-wildflowers.jpeg',
             title: 'Valley Meadow',
             description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
+          }
+        ]
+      },
+      {
+        id: 'yosemite-winter-2023',
+        folderId: 'national-parks/yosemite/winter-2023',
+        title: 'Yosemite Winter 2023',
+        description: 'The dramatic beauty of Yosemite Valley transformed by winter snow and ice',
+        photos: [
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/frozen-falls.jpeg',
+            title: 'Frozen Yosemite Falls',
+            description: 'Yosemite Falls partially frozen during winter conditions'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/snow-valley.jpeg',
+            title: 'Snow-covered Valley',
+            description: 'Yosemite Valley blanketed in fresh winter snow'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/winter-mirror.jpeg',
+            title: 'Winter Mirror Lake',
+            description: 'Half Dome reflected in the still waters of Mirror Lake'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/frost-meadow.jpeg',
+            title: 'Frosty Meadow',
+            description: 'Cook\'s Meadow on a crisp winter morning'
+          }
+        ],
+        allPhotos: [
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/frozen-falls.jpeg',
+            title: 'Frozen Yosemite Falls',
+            description: 'Yosemite Falls partially frozen during winter conditions'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/snow-valley.jpeg',
+            title: 'Snow-covered Valley',
+            description: 'Yosemite Valley blanketed in fresh winter snow'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/winter-mirror.jpeg',
+            title: 'Winter Mirror Lake',
+            description: 'Half Dome reflected in the still waters of Mirror Lake'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/frost-meadow.jpeg',
+            title: 'Frosty Meadow',
+            description: 'Cook\'s Meadow on a crisp winter morning'
           }
         ]
       }

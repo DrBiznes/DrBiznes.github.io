@@ -30,10 +30,10 @@ interface SocialLink {
 
 const socialLinks: SocialLink[] = [
   { platform: 'GitHub', username: '@DrBiznes', url: 'https://github.com/DrBiznes' },
-  { platform: 'Twitter', username: '@JaminoTrue', url: 'https://twitter.com/JaminoTrue' },
+  { platform: 'Twitter', username: '@DrBiznez', url: 'https://twitter.com/DrBiznez' },
   { platform: 'LinkedIn', username: 'jamino', url: 'https://linkedin.com/in/jamino' },
-  { platform: 'Discord', username: 'jamino', url: 'https://discord.gg/your-server' },
-  { platform: 'Email', username: 'contact@jamino.dev', url: 'mailto:contact@jamino.dev' }
+  { platform: 'Discord', username: 'jamino', url: 'https://discord.gg/jqFF64rXZZ' },
+  { platform: 'Email', username: 'jamesfemino@gmail.com', url: 'mailto:jamesfemino@gmail.com' }
 ];
 
 const drawBox = (title: string, content: string[]) => {

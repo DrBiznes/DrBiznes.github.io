@@ -41,12 +41,7 @@ export const GalleryView = () => {
             plugins={[lgThumbnail, lgZoom, lgVideo]}
             mode="lg-fade"
             elementClassNames="gallery-container"
-            autoplayFirstVideo={false}
-            videojs={true}
-            videojsOptions={{
-              muted: false,
-              controls: true
-            }}
+            exThumbImage="data-thumb"
             onInit={(detail) => {
               setTimeout(() => {
                 detail.instance.openGallery(initialPhotoIndex);
@@ -78,7 +73,7 @@ export const GalleryView = () => {
                     poster: photo.thumbnailUrl
                   }
                 }) : undefined}
-                data-thumb={photo.type === 'video' ? photo.thumbnailUrl : photo.imageUrl}
+                data-thumb={photo.thumbnailUrl || photo.imageUrl}
                 data-sub-html={`<h4>${photo.title}</h4><p>${photo.description || ''}</p>`}
               >
                 {photo.type === 'video' ? (
