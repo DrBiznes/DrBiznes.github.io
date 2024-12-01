@@ -1,7 +1,8 @@
-interface PhotoItem {
+export interface PhotoItem {
   imageUrl: string;
   title: string;
-  description: string;
+  description?: string;
+  type?: 'image' | 'video';
 }
 
 interface PhotoSet {
@@ -55,26 +56,61 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
-            title: 'Valley View',
-            description: 'Expansive valley view with Mount McKinley in the background'
+            "imageUrl": "/photos/national-parks/katmai/BackwardBear.JPEG",
+            "type": "image",
+            "title": "Backward Bear",
           },
           {
-            imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
-            title: 'Serene Lake',
-            description: 'A tranquil lake reflecting the surrounding mountains'
+            "imageUrl": "/photos/national-parks/katmai/CoolestNameForAValley.JPEG",
+            "type": "image",
+            "title": "Coolest Name Fora Valley",
           },
           {
-            imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
-            title: 'Wildlife',
-            description: 'A glimpse of the diverse wildlife in the park'
+            "imageUrl": "/photos/national-parks/katmai/Iditarod.JPEG",
+            "type": "image",
+            "title": "Iditarod",
           },
           {
-            imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
-            title: 'Sunset Vista',
-            description: 'A breathtaking sunset over the rugged landscape'
-          }
-        ]
+            "imageUrl": "/photos/national-parks/katmai/JerryBruckheimerTree.JPEG",
+            "type": "image",
+            "title": "Jerry Bruckheimer Tree",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/NoSuddenMovesOne.JPEG",
+            "type": "image",
+            "title": "No Sudden Moves One",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/NoSuddenMovesTwo.MOV",
+            "type": "video",
+            "title": "No Sudden Moves Two",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/NobleBear.JPEG",
+            "type": "image",
+            "title": "Noble Bear",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/TenthousandSmokes.JPEG",
+            "type": "image",
+            "title": "Tenthousand Smokes",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/TheShow.JPEG",
+            "type": "image",
+            "title": "The Show",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/WadingBear.JPEG",
+            "type": "image",
+            "title": "Wading Bear",
+          },
+          {
+            "imageUrl": "/photos/national-parks/katmai/a-Short-Hike.JPEG",
+            "type": "image",
+            "title": "A Short Hike",
+          },
+        ]        
       },
       {
         id: 'yosemite',
@@ -124,6 +160,75 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             title: 'Valley Meadow',
             description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
           }
+        ]
+      }
+    ]
+  },
+  'american-south': {
+    id: 'american-south',
+    title: 'American South',
+    description: 'Exploring the culture and beauty of the American South',
+    photoSets: [
+      {
+        id: 'new-orleans',
+        folderId: 'american-south/new-orleans',
+        title: 'New Orleans, LA',
+        description: 'The vibrant culture and historic architecture of the Crescent City',
+        photos: [
+          {
+            imageUrl: '/photos/american-south/new-orleans/french-quarter.jpeg',
+            title: 'French Quarter',
+            description: 'Historic buildings with traditional iron balconies'
+          },
+          {
+            imageUrl: '/photos/american-south/new-orleans/streetcar.jpeg',
+            title: 'St. Charles Streetcar',
+            description: 'Historic streetcar rolling through the Garden District'
+          },
+          {
+            imageUrl: '/photos/american-south/new-orleans/cafe.jpeg',
+            title: 'Café du Monde',
+            description: 'Famous café known for beignets and café au lait'
+          },
+          {
+            imageUrl: '/photos/american-south/new-orleans/jazz.jpeg',
+            title: 'Jazz on Frenchmen',
+            description: 'Live jazz performance in the evening'
+          }
+        ],
+        allPhotos: [
+          // Same as photos array for now, can be expanded later
+        ]
+      },
+      {
+        id: 'saint-francisville',
+        folderId: 'american-south/saint-francisville',
+        title: 'Saint Francisville, LA',
+        description: 'A historic town known for its antebellum plantations and gardens',
+        photos: [
+          {
+            imageUrl: '/photos/american-south/saint-francisville/rosedown.jpeg',
+            title: 'Rosedown Plantation',
+            description: 'Historic plantation house with formal gardens'
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/oakley.jpeg',
+            title: 'Oakley House',
+            description: 'Historic home of naturalist John James Audubon'
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/grace.jpeg',
+            title: 'Grace Episcopal Church',
+            description: 'Gothic Revival church dating from 1858'
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/downtown.jpeg',
+            title: 'Historic Downtown',
+            description: 'Charming main street with antique shops and cafes'
+          }
+        ],
+        allPhotos: [
+          // Same as photos array for now, can be expanded later
         ]
       }
     ]

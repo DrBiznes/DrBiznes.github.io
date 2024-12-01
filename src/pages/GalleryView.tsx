@@ -6,6 +6,8 @@ import 'lightgallery/css/lg-zoom.css';
 import 'lightgallery/css/lg-thumbnail.css';
 import lgThumbnail from 'lightgallery/plugins/thumbnail';
 import lgZoom from 'lightgallery/plugins/zoom';
+import lgVideo from 'lightgallery/plugins/video';
+import 'lightgallery/css/lg-video.css';
 import { photoGalleries } from '../config/photos';
 
 export const GalleryView = () => {
@@ -36,10 +38,15 @@ export const GalleryView = () => {
         <div className="relative h-full w-full z-[1000]">
           <LightGallery
             speed={500}
-            plugins={[lgThumbnail, lgZoom]}
+            plugins={[lgThumbnail, lgZoom, lgVideo]}
             mode="lg-fade"
             elementClassNames="gallery-container"
             autoplayFirstVideo={false}
+            videojs={true}
+            videojsOptions={{
+              muted: false,
+              controls: true
+            }}
             onInit={(detail) => {
               setTimeout(() => {
                 detail.instance.openGallery(initialPhotoIndex);
@@ -60,13 +67,20 @@ export const GalleryView = () => {
                 key={index}
                 className="gallery-item"
                 data-src={photo.imageUrl}
-                data-sub-html={`<h4>${photo.title}</h4><p>${photo.description}</p>`}
+                data-video={photo.type === 'video' ? '{"source": [{"src": "' + photo.imageUrl + '", "type":"video/mp4"}]}' : undefined}
+                data-sub-html={`<h4>${photo.title}</h4><p>${photo.description || ''}</p>`}
               >
-                <img 
-                  alt={photo.title} 
-                  src={photo.imageUrl} 
-                  className="hidden"
-                />
+                {photo.type === 'video' ? (
+                  <video className="hidden">
+                    <source src={photo.imageUrl} type="video/mp4" />
+                  </video>
+                ) : (
+                  <img 
+                    alt={photo.title} 
+                    src={photo.imageUrl} 
+                    className="hidden"
+                  />
+                )}
               </a>
             ))}
           </LightGallery>

@@ -1,13 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { photoGalleries } from '../config/photos';
-
-interface PhotoItem {
-  imageUrl: string;
-  title: string;
-  description: string;
-}
+import { photoGalleries, PhotoItem } from '../config/photos';
 
 interface FolderData {
   folderId: string;
@@ -43,48 +37,56 @@ const PhotoSet = ({
   const navigate = useNavigate();
   const { galleryId } = useParams();
 
-  const positions = [
+  const getRandomOffset = () => {
+    return Math.random() > 0.8 ? (Math.random() * 40 - 20) + 'px' : '0px';
+  };
+
+  const getRandomSize = (baseSize: number) => {
+    return Math.random() > 0.8 ? baseSize + (Math.random() * 60 - 30) : baseSize;
+  };
+
+  const positions = useMemo(() => [
     {
       wrapperStyle: {
-        left: '35%',
-        top: '15%',
+        left: `calc(35% + ${getRandomOffset()})`,
+        top: `calc(15% + ${getRandomOffset()})`,
         transform: 'rotate(-12deg)',
-        width: '400px',
+        width: `${getRandomSize(400)}px`,
         position: 'absolute' as const,
         zIndex: 2,
       },
     },
     {
       wrapperStyle: {
-        right: '10%',
-        top: '25%',
+        right: `calc(10% + ${getRandomOffset()})`,
+        top: `calc(25% + ${getRandomOffset()})`,
         transform: 'rotate(6deg)',
-        width: '500px',
+        width: `${getRandomSize(500)}px`,
         position: 'absolute' as const,
         zIndex: 3,
       },
     },
     {
       wrapperStyle: {
-        left: '28%',
-        bottom: '20%',
+        left: `calc(28% + ${getRandomOffset()})`,
+        bottom: `calc(20% + ${getRandomOffset()})`,
         transform: 'rotate(-8deg)',
-        width: '450px',
+        width: `${getRandomSize(450)}px`,
         position: 'absolute' as const,
         zIndex: 1,
       },
     },
     {
       wrapperStyle: {
-        right: '15%',
-        bottom: '15%',
+        right: `calc(15% + ${getRandomOffset()})`,
+        bottom: `calc(15% + ${getRandomOffset()})`,
         transform: 'rotate(4deg)',
-        width: '380px',
+        width: `${getRandomSize(380)}px`,
         position: 'absolute' as const,
         zIndex: 4,
       },
     },
-  ];
+  ], []);
 
   const getZIndex = (index: number) => {
     return hoveredIndex === index ? 50 : positions[index].wrapperStyle.zIndex;
@@ -95,7 +97,9 @@ const PhotoSet = ({
     navigate(`/photos/${galleryId}/${setId}/gallery?photoIndex=${clickedPhotoIndex}`);
   };
 
-  const drawBox = (title: string, content: string[], isCenter: boolean = false) => {
+  const drawBox = (title: string, content: (string | undefined)[], isCenter: boolean = false) => {
+    const validContent = content.filter((item): item is string => !!item);
+    
     const maxWidth = isCenter ? 80 : 40;
     
     return (
@@ -107,7 +111,7 @@ const PhotoSet = ({
             {`${ASCII.bottomLeft}${ASCII.horizontal.repeat(Math.min(title.length + 2, maxWidth))}${ASCII.bottomRight}`}
           </div>
         )}
-        {content.map((text, index) => (
+        {validContent.map((text, index) => (
           <div key={index} className="opacity-80" style={{ maxWidth: `${maxWidth}ch` }}>
             {text}
           </div>

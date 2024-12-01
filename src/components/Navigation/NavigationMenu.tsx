@@ -30,7 +30,7 @@ const menuData: MenuItem = {
       path: '/photos',
       children: [
         { name: 'National Parks', path: '/photos/national-parks' },
-        { name: 'New Orleans, LA', path: '/photos/new-orleans' },
+        { name: 'American South', path: '/photos/american-south' },
         { name: 'Misc', path: '/photos/misc' }
       ]
     },
