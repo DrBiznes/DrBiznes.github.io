@@ -121,7 +121,7 @@ const PhotoSet = ({
   };
 
   return (
-    <div className="relative h-screen overflow-hidden" style={{ marginLeft: '250px' }}>
+    <div id={`photo-set-${setIndex}`} className="relative h-screen overflow-hidden" style={{ marginLeft: '250px' }}>
       <AnimatePresence>
         <>
           <motion.div 
@@ -217,14 +217,31 @@ export const PhotosPage = () => {
         exit={{ opacity: 0 }}
       >
         {gallery.photoSets.map((set, index) => (
-          <PhotoSet
-            key={index}
-            setIndex={index}
-            title={set.title}
-            description={set.description}
-            photos={set.photos}
-            folderData={{ folderId: set.folderId, photos: set.allPhotos }}
-          />
+          <React.Fragment key={index}>
+            <PhotoSet
+              setIndex={index}
+              title={set.title}
+              description={set.description}
+              photos={set.photos}
+              folderData={{ folderId: set.folderId, photos: set.allPhotos }}
+            />
+            {index < gallery.photoSets.length - 1 && (
+              <motion.div 
+                className="w-full text-center py-8 text-white -mt-20 cursor-pointer relative z-20"
+                whileHover={{ y: [0, -8, 0] }}
+                transition={{ 
+                  repeat: Infinity,
+                  duration: 1.5
+                }}
+                onClick={() => {
+                  const nextSet = document.getElementById(`photo-set-${index + 1}`);
+                  nextSet?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                ↓ Scroll down for more photos ↓
+              </motion.div>
+            )}
+          </React.Fragment>
         ))}
       </motion.div>
     </div>

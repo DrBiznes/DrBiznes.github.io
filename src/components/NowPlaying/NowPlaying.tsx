@@ -65,17 +65,19 @@ export const NowPlaying = () => {
   };
 
   return (
-    <div className="fixed top-4 right-4 text-white font-mono z-[100] p-2 rounded max-w-[800px]">
+    <Link 
+      to="/jam"
+      className="fixed top-4 right-4 text-white font-mono z-[100] p-2 rounded max-w-[800px] hover:text-blue-400 transition-colors flex flex-col items-end gap-y-2"
+    >
       {error ? (
         'Failed to load track info'
       ) : !lastTrack ? (
         'Loading...'
       ) : (
-        <div className="flex flex-col items-end gap-y-2">
+        <>
           <div className="whitespace-nowrap">Jam JUST listened to</div>
-          <Link 
-            to="/jam"
-            className="hover:text-blue-400 transition-colors text-right"
+          <div
+            className="text-right"
             style={{
               display: '-webkit-box',
               WebkitLineClamp: 2,
@@ -87,9 +89,9 @@ export const NowPlaying = () => {
             }}
           >
             [{lastTrack.name} - {lastTrack.artist}]
-          </Link>
-        </div>
+          </div>
+        </>
       )}
-    </div>
+    </Link>
   );
 }; 

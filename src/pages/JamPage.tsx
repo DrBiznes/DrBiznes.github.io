@@ -1,10 +1,32 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Water } from '../components/Water/Water';
+import { format, parseISO } from 'date-fns';
 
 interface Playlist {
   name: string;
   embedUrl: string;
+}
+
+interface Track {
+  name: string;
+  artist: string;
+  playcount?: number;
+  duration?: number;
+  lastPlayed?: string;
+}
+
+interface Artist {
+  name: string;
+  playcount: number;
+  lastPlayed?: string;
+}
+
+interface Album {
+  name: string;
+  artist: string;
+  playcount: number;
+  duration?: number;
 }
 
 const playlists: Playlist[] = [
@@ -30,6 +52,20 @@ const playlists: Playlist[] = [
   }
 ];
 
+const statsTabs = [
+  "Last Played",
+  "Top Weekly",
+  "Top Monthly",
+  "All Time",
+  "Top Artists",
+  "Top Albums"
+] as const;
+
+type StatsTab = typeof statsTabs[number];
+
+const LASTFM_API_KEY = process.env.REACT_APP_LASTFM_API_KEY;
+const LASTFM_USERNAME = 'bob10234';
+
 // Updated Spotify icon component with larger size
 const SpotifyIcon = () => (
   <svg 
@@ -46,6 +82,9 @@ const SpotifyIcon = () => (
 export const JamPage = () => {
   const [selectedPlaylist, setSelectedPlaylist] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [selectedStatsTab, setSelectedStatsTab] = useState<StatsTab>("Last Played");
+  const [statsData, setStatsData] = useState<Track[] | Artist[] | Album[]>([]);
+  const [isStatsLoading, setIsStatsLoading] = useState(true);
 
   const handlePlaylistChange = (index: number) => {
     setIsLoading(true);
@@ -55,6 +94,124 @@ export const JamPage = () => {
       setIsLoading(false);
     }, 500);
   };
+
+  useEffect(() => {
+    let isMounted = true;  // Track mounted state
+
+    const fetchStatsData = async () => {
+      setIsStatsLoading(true);
+      try {
+        let method = '';
+        let params = '';
+        
+        switch (selectedStatsTab) {
+          case "Last Played":
+            method = 'user.getrecenttracks';
+            params = '&limit=10';
+            break;
+          case "Top Weekly":
+            method = 'user.gettoptracks';
+            params = '&period=7day&limit=10';
+            break;
+          case "Top Monthly":
+            method = 'user.gettoptracks';
+            params = '&period=1month&limit=10';
+            break;
+          case "All Time":
+            method = 'user.gettoptracks';
+            params = '&period=overall&limit=10';
+            break;
+          case "Top Artists":
+            method = 'user.gettopartists';
+            params = '&period=overall&limit=10';
+            break;
+          case "Top Albums":
+            method = 'user.gettopalbums';
+            params = '&period=overall&limit=10';
+            break;
+        }
+
+        const response = await fetch(
+          `https://ws.audioscrobbler.com/2.0/?method=${method}&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json${params}`
+        );
+        
+        // Check if component is still mounted before proceeding
+        if (!isMounted) return;
+        
+        if (!response.ok) throw new Error('Failed to fetch');
+        const data = await response.json();
+        
+        let transformedData = [];
+        
+        if (selectedStatsTab === "Top Artists" && isMounted) {
+          // Get top artists first
+          const artists = data.topartists.artist;
+          
+          const trackResponse = await fetch(
+            `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&limit=1000`
+          );
+          
+          // Check mounted state again after second API call
+          if (!isMounted) return;
+          
+          const trackData = await trackResponse.json();
+          
+          // Process each artist
+          transformedData = artists.map((artist: any) => {
+            // Filter tracks to find the most played one by this artist
+            const artistTracks = trackData.toptracks.track.filter(
+              (track: any) => track.artist.name.toLowerCase() === artist.name.toLowerCase()
+            );
+            const topTrack = artistTracks[0]; // First track is the most played
+            
+            return {
+              name: artist.name,
+              playcount: artist.playcount,
+              topTrack: topTrack ? topTrack.name : 'N/A',
+              topTrackPlays: topTrack ? topTrack.playcount : 'N/A'
+            };
+          });
+        } else if (selectedStatsTab === "Last Played") {
+          transformedData = data.recenttracks.track.map((track: any) => ({
+            name: track.name,
+            artist: track.artist['#text'],
+            lastPlayed: track.date ? new Date(Number(track.date.uts) * 1000).toISOString() : 'Now Playing'
+          }));
+        } else if (["Top Weekly", "Top Monthly", "All Time"].includes(selectedStatsTab)) {
+          transformedData = data.toptracks.track.map((track: any) => ({
+            name: track.name,
+            artist: track.artist.name,
+            playcount: track.playcount,
+            duration: Math.round(track.duration / 60)
+          }));
+        } else if (selectedStatsTab === "Top Albums") {
+          transformedData = data.topalbums.album.map((album: any) => ({
+            name: album.name,
+            artist: album.artist.name,
+            playcount: album.playcount,
+            url: album.url
+          }));
+        }
+
+        if (isMounted) {
+          setStatsData(transformedData);
+          setIsStatsLoading(false);
+        }
+      } catch (err) {
+        if (isMounted) {
+          console.error('Stats fetch error:', err);
+          setIsStatsLoading(false);
+        }
+      }
+    };
+
+    fetchStatsData();
+
+    // Cleanup function
+    return () => {
+      isMounted = false;
+    };
+  }, [selectedStatsTab]);
 
   return (
     <motion.div
@@ -74,13 +231,13 @@ export const JamPage = () => {
           >
             {/* Title Bar */}
             <div className="border-b border-white px-4 py-2">
-              <span className="text-white font-mono">Profile</span>
+              <span className="text-white font-mono">My Profile</span>
             </div>
             {/* Content */}
             <div className="p-4">
               <div className="flex flex-col items-center space-y-4">
                 <img 
-                  src="/spiral.jpg" 
+                  src="/assets/pfp.png" 
                   alt="Profile" 
                   className="w-24 h-24 rounded-full"
                 />
@@ -106,7 +263,7 @@ export const JamPage = () => {
           >
             {/* Title Bar */}
             <div className="border-b border-white px-4 py-2">
-              <span className="text-white font-mono">Playlists</span>
+              <span className="text-white font-mono">Best Playlists Of All Time</span>
             </div>
             {/* Content */}
             <div className="p-4">
@@ -173,6 +330,145 @@ export const JamPage = () => {
             </div>
           </motion.div>
         </div>
+
+        {/* New Stats Card */}
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          className="bg-black/90 border border-white rounded-lg mx-auto"
+          style={{ marginLeft: '12%', marginRight: '20%' }}
+        >
+          {/* Title Bar */}
+          <div className="border-b border-white px-4 py-2">
+            <span className="text-white font-mono">Spotify Stats</span>
+          </div>
+          
+          {/* Content */}
+          <div className="p-4">
+            {/* Stats Tab Selector */}
+            <div className="flex flex-wrap mb-4 border border-white rounded-lg overflow-hidden relative">
+              {statsTabs.map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setSelectedStatsTab(tab)}
+                  className={`relative flex-1 min-w-[120px] py-2 px-4 font-mono text-sm transition-colors ${
+                    selectedStatsTab === tab 
+                      ? 'text-black' 
+                      : 'text-white hover:bg-white/10'
+                  }`}
+                >
+                  {selectedStatsTab === tab && (
+                    <motion.div
+                      layoutId="activeStatsTab"
+                      className="absolute inset-0 bg-white"
+                      initial={false}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30
+                      }}
+                    />
+                  )}
+                  <span className="relative z-10">{tab}</span>
+                </button>
+              ))}
+            </div>
+
+            {/* Stats Content */}
+            <AnimatePresence mode="wait">
+              {isStatsLoading ? (
+                <motion.div
+                  key="loading"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="h-[380px] bg-white/10 animate-pulse rounded-lg"
+                />
+              ) : (
+                <motion.div
+                  key={selectedStatsTab}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="overflow-y-auto max-h-[380px]"
+                >
+                  <table className="w-full text-white font-mono">
+                    <thead>
+                      <tr className="border-b border-white/20">
+                        <th className="py-2 px-4 text-left">#</th>
+                        {selectedStatsTab === "Top Artists" ? (
+                          <>
+                            <th className="py-2 px-4 text-left">Artist</th>
+                            <th className="py-2 px-4 text-left">Most Played Track</th>
+                            <th className="py-2 px-4 text-right">Track Plays</th>
+                            <th className="py-2 px-4 text-right">Total Plays</th>
+                          </>
+                        ) : selectedStatsTab === "Top Albums" ? (
+                          <>
+                            <th className="py-2 px-4 text-left">Album</th>
+                            <th className="py-2 px-4 text-left">Artist</th>
+                            <th className="py-2 px-4 text-right">Plays</th>
+                          </>
+                        ) : (
+                          <>
+                            <th className="py-2 px-4 text-left">Track</th>
+                            <th className="py-2 px-4 text-left">Artist</th>
+                            {selectedStatsTab === "Last Played" ? (
+                              <th className="py-2 px-4 text-right">Played</th>
+                            ) : (
+                              <>
+                                <th className="py-2 px-4 text-right">Plays</th>
+                                <th className="py-2 px-4 text-right">Duration</th>
+                              </>
+                            )}
+                          </>
+                        )}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {statsData.map((item: any, index) => (
+                        <tr key={index} className="border-b border-white/10">
+                          <td className="py-2 px-4">{index + 1}</td>
+                          {selectedStatsTab === "Top Artists" ? (
+                            <>
+                              <td className="py-2 px-4">{item.name}</td>
+                              <td className="py-2 px-4">{item.topTrack}</td>
+                              <td className="py-2 px-4 text-right">{item.topTrackPlays}</td>
+                              <td className="py-2 px-4 text-right">{item.playcount}</td>
+                            </>
+                          ) : selectedStatsTab === "Top Albums" ? (
+                            <>
+                              <td className="py-2 px-4">{item.name}</td>
+                              <td className="py-2 px-4">{item.artist}</td>
+                              <td className="py-2 px-4 text-right">{item.playcount}</td>
+                            </>
+                          ) : (
+                            <>
+                              <td className="py-2 px-4">{item.name}</td>
+                              <td className="py-2 px-4">{item.artist}</td>
+                              {selectedStatsTab === "Last Played" ? (
+                                <td className="py-2 px-4 text-right">
+                                  {item.lastPlayed === 'Now Playing' || !item.lastPlayed
+                                    ? 'Now Playing'
+                                    : format(parseISO(item.lastPlayed), 'MMM d, h:mm a')}
+                                </td>
+                              ) : (
+                                <>
+                                  <td className="py-2 px-4 text-right">{item.playcount}</td>
+                                  <td className="py-2 px-4 text-right">{item.duration} min</td>
+                                </>
+                              )}
+                            </>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        </motion.div>
       </div>
       <Water />
     </motion.div>
