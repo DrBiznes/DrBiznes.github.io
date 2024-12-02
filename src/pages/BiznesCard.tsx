@@ -94,14 +94,14 @@ export const BiznesCard = () => {
         {/* Business card with double-line border */}
         <div className="whitespace-pre text-left w-[800px]">
           {drawBusinessCard([
-            'TR                                                     James P. Femino',
-            '                                                          Treasurer',
-            '',
-            '',
-            '',
-            '                                        Thunderegg Records, Non Profit',
-            '                                                   Eugene, Oregon',
-            '                                   One of the worlds top 3 problem solvers'
+            '  $$$$$$$$\\ $$$$$$$\\                    James P. Femino',
+            '  \\__$$  __|$$  __$$\\                   Treasurer',
+            '     $$ |   $$ |  $$ |',
+            '     $$ |   $$$$$$$  |',
+            '     $$ |   $$  __$$<                   Thunderegg Records, Non Profit',
+            '     $$ |   $$ |  $$ |                  Eugene, Oregon',
+            '     $$ |   $$ |  $$ |',
+            '     \\__|   \\__|  \\__|         One of the worlds top 3 problem solvers'
           ])}
         </div>
 
