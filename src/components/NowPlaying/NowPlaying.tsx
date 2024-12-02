@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 interface Track {
   name: string;
@@ -72,10 +73,8 @@ export const NowPlaying = () => {
       ) : (
         <div className="flex flex-col items-end gap-y-2">
           <div className="whitespace-nowrap">Jam JUST listened to</div>
-          <a 
-            href={SPOTIFY_PROFILE}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link 
+            to="/jam"
             className="hover:text-blue-400 transition-colors text-right"
             style={{
               display: '-webkit-box',
@@ -88,7 +87,7 @@ export const NowPlaying = () => {
             }}
           >
             [{lastTrack.name} - {lastTrack.artist}]
-          </a>
+          </Link>
         </div>
       )}
     </div>

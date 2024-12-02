@@ -7,6 +7,7 @@ import { BiznesCard } from './pages/BiznesCard';
 import { PhotosPage } from './pages/PhotosPage';
 import { GalleryView } from './pages/GalleryView';
 import NotFound from './pages/NotFound';
+import { JamPage } from './pages/JamPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/biznes-card" element={<BiznesCard />} />
           <Route path="/photos/:galleryId" element={<PhotosPage />} />
           <Route path="/photos/:galleryId/:setId/gallery" element={<GalleryView />} />
+          <Route path="/jam" element={<JamPage />} />
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
