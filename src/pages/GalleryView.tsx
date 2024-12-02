@@ -27,14 +27,13 @@ export const GalleryView = () => {
   const handleClose = () => {
     if (!isClosing) {
       setIsClosing(true);
-      navigate(`/photos/${galleryId}`);
+      navigate(`/photos/${galleryId}/${setId}`);
     }
   };
 
-  return (
+  return !isClosing ? (
     <div className="fixed inset-0 bg-black">
       <div className="relative h-full w-full">
-        {/* LightGallery container */}
         <div className="relative h-full w-full z-[1000]">
           <LightGallery
             speed={500}
@@ -58,7 +57,7 @@ export const GalleryView = () => {
             controls={true}
           >
             {photoSet.allPhotos.map((photo, index) => (
-              <a
+              <button
                 key={index}
                 className="gallery-item"
                 data-src={photo.type === 'video' ? undefined : photo.imageUrl}
@@ -87,7 +86,7 @@ export const GalleryView = () => {
                     className="hidden"
                   />
                 )}
-              </a>
+              </button>
             ))}
           </LightGallery>
         </div>
@@ -155,7 +154,7 @@ export const GalleryView = () => {
         `}
       </style>
     </div>
-  );
+  ) : null;
 };
 
 export default GalleryView;

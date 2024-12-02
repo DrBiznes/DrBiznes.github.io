@@ -202,8 +202,23 @@ const PhotoSet = ({
 };
 
 export const PhotosPage = () => {
-  const { galleryId } = useParams();
+  const { galleryId, setId } = useParams();
   const gallery = galleryId ? photoGalleries[galleryId] : undefined;
+
+  React.useEffect(() => {
+    if (setId) {
+      const setIndex = gallery?.photoSets.findIndex(set => 
+        set.folderId.split('/').pop() === setId
+      );
+      
+      if (setIndex !== undefined && setIndex !== -1) {
+        setTimeout(() => {
+          const element = document.getElementById(`photo-set-${setIndex}`);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [setId, gallery]);
 
   if (!gallery) {
     return <Navigate to="/404" replace />;

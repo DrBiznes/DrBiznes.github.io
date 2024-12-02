@@ -19,6 +19,7 @@ function App() {
           <Route path="/transit-database" element={<TransitDatabase />} />
           <Route path="/biznes-card" element={<BiznesCard />} />
           <Route path="/photos/:galleryId" element={<PhotosPage />} />
+          <Route path="/photos/:galleryId/:setId" element={<PhotosPage />} />
           <Route path="/photos/:galleryId/:setId/gallery" element={<GalleryView />} />
           <Route path="/jam" element={<JamPage />} />
           <Route path="*" element={<NotFound />} />

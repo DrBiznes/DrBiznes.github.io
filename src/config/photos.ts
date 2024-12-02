@@ -131,48 +131,63 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         description: 'Majestic granite cliffs, waterfalls, and scenic vistas captured during Summer 2024',
         photos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/half-dome.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
             title: 'Half Dome at Sunset',
             description: 'The iconic Half Dome glowing in the golden evening light'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/yosemite-falls.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
             title: 'Yosemite Falls',
             description: 'The magnificent Yosemite Falls in full summer flow'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/tunnel-view.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/Dome-pinch.JPEG',
             title: 'Tunnel View Vista',
             description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/meadow-wildflowers.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/InAwe.JPEG',
             title: 'Valley Meadow',
             description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
           }
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/half-dome.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
+            type: 'image',
             title: 'Half Dome at Sunset',
-            description: 'The iconic Half Dome glowing in the golden evening light'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/yosemite-falls.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
+            type: 'image',
             title: 'Yosemite Falls',
-            description: 'The magnificent Yosemite Falls in full summer flow'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/tunnel-view.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/Dome-pinch.JPEG',
+            type: 'image',
             title: 'Tunnel View Vista',
-            description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/meadow-wildflowers.jpeg',
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/InAwe.JPEG',
+            type: 'image',
             title: 'Valley Meadow',
-            description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/EveningDome.JPEG',
+            type: 'image',
+            title: 'Evening Dome',
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/TenayaValley.JPEG',
+            type: 'image',
+            title: 'Above Tenaya',
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/TreePinch.JPEG',
+            type: 'image',
+            title: 'Tree Pinch',
           }
-        ]
+        ]        
       },
       {
         id: 'yosemite-winter-2023',
