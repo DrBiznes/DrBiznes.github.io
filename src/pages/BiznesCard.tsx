@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Water } from '../components/Water/Water';
+import { Link } from 'react-router-dom';
 
 const ASCII = {
   topLeft: '┌',
@@ -24,16 +25,15 @@ const BORDER = {
 
 interface SocialLink {
   platform: string;
-  username: string;
   url: string;
 }
 
 const socialLinks: SocialLink[] = [
-  { platform: 'GitHub', username: '@DrBiznes', url: 'https://github.com/DrBiznes' },
-  { platform: 'Twitter', username: '@DrBiznez', url: 'https://twitter.com/DrBiznez' },
-  { platform: 'LinkedIn', username: 'jamino', url: 'https://linkedin.com/in/jamino' },
-  { platform: 'Discord', username: 'jamino', url: 'https://discord.gg/jqFF64rXZZ' },
-  { platform: 'Email', username: 'jamesfemino@gmail.com', url: 'mailto:jamesfemino@gmail.com' }
+  { platform: 'GitHub', url: 'https://github.com/DrBiznes' },
+  { platform: 'Twitter', url: 'https://twitter.com/DrBiznez' },
+  { platform: 'LinkedIn', url: 'https://linkedin.com/in/jamino' },
+  { platform: 'Discord', url: 'https://discord.gg/jqFF64rXZZ' },
+  { platform: 'Email', url: '/email' }
 ];
 
 const drawBox = (title: string, content: string[]) => {
@@ -105,34 +105,46 @@ export const BiznesCard = () => {
           ])}
         </div>
 
-        {/* Original ASCII box for the poem */}
+        {/* Original ASCII box replaced with new About section */}
         <div className="whitespace-pre text-left w-[500px]">
           <pre>
-            {drawBox('I Know NOTHING', [
-              'God, once more I sit and wait,',
-              'While Maven spins my mental state,',
-              'These dependencies cascade,',
-              'Like choices that I shouldn\'t have made.',
+            {drawBox('About', [
+              'I\'m currently a senior pursuing a B.S in Public',
+              'Policy Planning and Management at The University of',
+              'Oregon with a minor in Sustainable Business.',
               '',
-              'Each error cryptic as can be,',
-              'Stack traces to infinity,',
-              'NullPointerException hell,',
-              'Which line? Only God can tell.'
+              'I barely know anything about technology, I just',
+              'make this stuff as a hobby. My main interest is',
+              'trains...',
+              '',
+              'Like seriously, trains are my thing. I\'ll stay up',
+              'for 50 hours straight learning about locomotives',
+              'which is probably why I\'m one of the top 3 problem solvers.'
             ])}
           </pre>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 w-full mt-4">
           {socialLinks.map(link => (
-            <a
-              key={link.platform}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
-            >
-              [{link.platform}]
-            </a>
+            link.platform === 'Email' ? (
+              <Link
+                key={link.platform}
+                to={link.url}
+                className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+              >
+                [{link.platform}]
+              </Link>
+            ) : (
+              <a
+                key={link.platform}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+              >
+                [{link.platform}]
+              </a>
+            )
           ))}
         </div>
       </div>

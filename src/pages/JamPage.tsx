@@ -178,12 +178,19 @@ export const JamPage = () => {
             lastPlayed: track.date ? new Date(Number(track.date.uts) * 1000).toISOString() : 'Now Playing'
           }));
         } else if (["Top Weekly", "Top Monthly", "All Time"].includes(selectedStatsTab)) {
-          transformedData = data.toptracks.track.map((track: any) => ({
-            name: track.name,
-            artist: track.artist.name,
-            playcount: track.playcount,
-            duration: Math.round(track.duration / 60)
-          }));
+          transformedData = data.toptracks.track.map((track: any) => {
+            console.log(`Track: ${track.name}, Raw duration: ${track.duration}`);
+            const durationNum = Number(track.duration);
+            const duration = track.duration && durationNum > 0 
+              ? Math.max(1, Math.ceil(durationNum / 60)) // Ensure minimum of 1 minute for any valid duration
+              : 'N/A';
+            return {
+              name: track.name,
+              artist: track.artist.name,
+              playcount: track.playcount,
+              duration
+            };
+          });
         } else if (selectedStatsTab === "Top Albums") {
           transformedData = data.topalbums.album.map((album: any) => ({
             name: album.name,
@@ -455,7 +462,9 @@ export const JamPage = () => {
                               ) : (
                                 <>
                                   <td className="py-2 px-4 text-right">{item.playcount}</td>
-                                  <td className="py-2 px-4 text-right">{item.duration} min</td>
+                                  <td className="py-2 px-4 text-right">
+                                    {typeof item.duration === 'number' ? `${item.duration} min` : item.duration}
+                                  </td>
                                 </>
                               )}
                             </>

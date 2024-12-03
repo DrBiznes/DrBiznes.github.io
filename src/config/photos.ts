@@ -42,7 +42,7 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           {
             imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
             title: 'Iditarod',
-            description: 'A tranquil lake reflecting the surrounding mountains'
+            description: 'This was us on our way to the airport.'
           },
           {
             imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
@@ -52,7 +52,7 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           {
             imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
             title: 'Ten Thousand Smokes',
-            description: 'A breathtaking sunset over the rugged landscape'
+            description: 'Hands down the coolest name for a valley, shoutout to the Sugpiaq people.'
           }
         ],
         allPhotos: [
@@ -132,13 +132,8 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         id: 'yosemite-summer-2024',
         folderId: 'national-parks/yosemite/summer-2024',
         title: 'Yosemite Summer 2024',
-        description: 'Majestic granite cliffs, waterfalls, and scenic vistas captured during Summer 2024',
+        description: 'Anytime I suggested doing a hike more than 5 miles they said I aint doin all that.',
         photos: [
-          {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
-            title: 'Cathedral Lake Loop',
-            description: 'Had the whole lake to ourselves. I saw a family of deer on the way out. They were so cute!!!'
-          },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
             title: 'Just Enough Mist',
@@ -148,6 +143,11 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/Dome-pinch.JPEG',
             title: 'Dome Pinch',
             description: 'He tried to squish Half Dome between his fingers. How original.'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
+            title: 'Cathedral Lake Loop',
+            description: 'Had the whole lake to ourselves. I saw a family of deer on the way out. They were so cute!!!'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/InAwe.JPEG',
@@ -286,64 +286,147 @@ export const photoGalleries: Record<string, PhotoGallery> = {
       {
         id: 'new-orleans',
         folderId: 'american-south/new-orleans',
-        title: 'New Orleans, LA',
-        description: 'The vibrant culture and historic architecture of the Crescent City',
+        title: 'New Orleans',
+        description: 'The most culturally rich city in America. The food is amazing. The people are amazing. The music is amazing. The history is amazing. The architecture is amazing. The weather is horrible. The food is amazing.',
         photos: [
           {
-            imageUrl: '/photos/american-south/new-orleans/french-quarter.jpeg',
-            title: 'French Quarter',
-            description: 'Historic buildings with traditional iron balconies'
+            imageUrl: '/photos/american-south/new-orleans/BoilNotice.JPEG',
+            title: 'Boil Notice',
+            description: 'Like ten days after we ate at this place, they had to reset the boil notice board.'
           },
           {
-            imageUrl: '/photos/american-south/new-orleans/streetcar.jpeg',
-            title: 'St. Charles Streetcar',
-            description: 'Historic streetcar rolling through the Garden District'
+            imageUrl: '/photos/american-south/new-orleans/I-Am-Loved.JPEG',
+            title: 'I Am Loved',
+            description: '@CEEDAMESSENGER is the greatest messenger and poet in the world please keep grafiting the sidewalks of new orleans'
           },
           {
-            imageUrl: '/photos/american-south/new-orleans/cafe.jpeg',
-            title: 'Café du Monde',
-            description: 'Famous café known for beignets and café au lait'
+            imageUrl: '/photos/american-south/new-orleans/WW2-Museum-Soldier-Sketch.JPEG',
+            title: 'WW2 Museum Soldier Sketch',
+            description: 'I visit the WWII museum every time I go to New Orleans, but the doctors say I\'m not autistic.'
           },
           {
-            imageUrl: '/photos/american-south/new-orleans/jazz.jpeg',
-            title: 'Jazz on Frenchmen',
-            description: 'Live jazz performance in the evening'
+            imageUrl: '/photos/american-south/new-orleans/AudubonButterfly.JPEG',
+            title: 'Audubon Butterfly',
+            description: 'I\'m not sure if this is a butterfly or a moth. I\'m not a scientist.'
           }
         ],
         allPhotos: [
-          // Same as photos array for now, can be expanded later
-        ]
+          {
+            "imageUrl": "/photos/american-south/new-orleans/BoilNotice.JPEG",
+            "type": "image",
+            "title": "Boil Notice",
+            "description": "Like ten days after we ate at this place, they had to reset the boil notice board."
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/I-Am-Loved.JPEG",
+            "type": "image",
+            "title": "I Am Loved",
+            "description": "@CEEDAMESSENGER is the greatest messenger and poet in the world please keep grafiting the sidewalks of new orleans"
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/WW2-Museum-Soldier-Sketch.JPEG",
+            "type": "image",
+            "title": "WW2 Museum Soldier Sketch",
+            "description": "I visit the WWII museum every time I go to New Orleans, but the doctors say I'm not allowed to remember anything."
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/AudubonButterfly.JPEG",
+            "type": "image",
+            "title": "Audubon Butterfly",
+            "description": "I'm not sure if this is a butterfly or a moth. I'm not a scientist."
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/I-Am-Funny.JPEG",
+            "type": "image",
+            "title": "I Am Funny",
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/I-Am-Strong.JPEG",
+            "type": "image",
+            "title": "I Am Strong",
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/I-AmBeautifulInsideAndOut.JPEG",
+            "type": "image",
+            "title": "I Am Beautiful Inside And Out",
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/I-Rise-I-Rise-I-Rise.JPEG",
+            "type": "image",
+            "title": "I Rise I Rise I Rise",
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/LayersOfClouds.JPEG",
+            "type": "image",
+            "title": "Layers Of Clouds",
+          },
+          {
+            "imageUrl": "/photos/american-south/new-orleans/Jellyfish.JPG",
+            "type": "image",
+            "title": "Jellyfish",
+          }
+        ]        
       },
       {
         id: 'saint-francisville',
         folderId: 'american-south/saint-francisville',
-        title: 'Saint Francisville, LA',
-        description: 'A historic town known for its antebellum plantations and gardens',
+        title: 'Saint Francisville',
+        description: 'This is where my grandma lives, and my mom grew up. Don\'t worry, we don\'t live on a plantation nor did our ancestors own slaves. At least I\'m pretty sure.',
         photos: [
           {
-            imageUrl: '/photos/american-south/saint-francisville/rosedown.jpeg',
-            title: 'Rosedown Plantation',
-            description: 'Historic plantation house with formal gardens'
+            imageUrl: '/photos/american-south/saint-francisville/BackyardSunset.JPG',
+            title: 'Backyard Sunset',
+            description: 'The sun sets over my grandma\'s backyard. The clouds look like they\'re on fire.'
           },
           {
-            imageUrl: '/photos/american-south/saint-francisville/oakley.jpeg',
-            title: 'Oakley House',
-            description: 'Historic home of naturalist John James Audubon'
+            imageUrl: '/photos/american-south/saint-francisville/GrandmasGator.JPEG',
+            title: 'Grandmas Gator',
+            description: 'This little guy lives in the pond behind grandma\'s house.'
           },
           {
-            imageUrl: '/photos/american-south/saint-francisville/grace.jpeg',
-            title: 'Grace Episcopal Church',
-            description: 'Gothic Revival church dating from 1858'
+            imageUrl: '/photos/american-south/saint-francisville/GrandmasSwing.jpeg',
+            title: 'Grandmas Swing',
+            description: 'The swing on grandma\'s front porch. I\'ve spent countless hours here just watching the world go by.'
           },
           {
-            imageUrl: '/photos/american-south/saint-francisville/downtown.jpeg',
-            title: 'Historic Downtown',
-            description: 'Charming main street with antique shops and cafes'
+            imageUrl: '/photos/american-south/saint-francisville/OrbWeaverOne.JPEG',
+            title: 'Orb Weaver',
+            description: 'These spiders are everywhere in Louisiana. They\'re harmless but they sure know how to make a beautiful web.'
           }
         ],
         allPhotos: [
-          // Same as photos array for now, can be expanded later
-        ]
+          {
+            imageUrl: '/photos/american-south/saint-francisville/BackyardSunset.JPG',
+            type: 'image',
+            title: 'Backyard Sunset',
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/GrandmasGator.JPEG',
+            type: 'image',
+            title: 'Grandmas Gator',
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/GrandmasSwing.jpeg',
+            type: 'image',
+            title: 'Grandmas Swing',
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/OrbWeaverOne.JPEG',
+            type: 'image',
+            title: 'Orb Weaver One',
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/OrbWeaver.mp4',
+            type: 'video',
+            title: 'Orb Weaver',
+            thumbnailUrl: '/photos/american-south/saint-francisville/OrbWeaverOne.JPEG'
+          },
+          {
+            imageUrl: '/photos/american-south/saint-francisville/OrbWeaverTwo.JPEG',
+            type: 'image',
+            title: 'Orb Weaver Two',
+          }
+        ]        
       }
     ]
   }

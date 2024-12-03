@@ -66,30 +66,30 @@ const NavigationItem = ({
               {Array.from({ length: level - 1 }).map((_, i) => (
                 <div
                   key={i}
-                  className="w-8 h-8 flex items-center justify-center"
+                  className="w-6 h-8 flex items-center justify-center"
                 >
                   <div className="w-[1px] h-full bg-white"/>
                 </div>
               ))}
-              <div className="w-8 h-8 flex items-center justify-center text-white">
+              <div className="w-6 h-8 flex items-center justify-center text-white">
                 {isLastChild ? '└' : '├'}
               </div>
-              <div className="w-4 h-8 flex items-center justify-center text-white">
+              <div className="w-3 h-8 flex items-center justify-center text-white">
                 ──
               </div>
             </>
           )}
           <div 
-            className="flex items-center cursor-pointer"
+            className={`flex items-center cursor-pointer ${level === 0 ? 'pl-1' : 'pl-0'}`}
             onClick={handleClick}
           >
-            <span className="mr-1 text-base">
+            <span className="mr-2 text-base">
               {item.children ? (isOpen ? '📂' : '📁') : '📄'}
             </span>
             {item.children && level === 0 ? (
               <Link 
                 to={item.path}
-                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-xl' : 'text-base'}`}
+                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-2xl' : 'text-base'}`}
               >
                 {item.name}
               </Link>

@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import Marquee from 'react-fast-marquee';
 
 interface Track {
   name: string;
@@ -8,18 +9,15 @@ interface Track {
 
 const LASTFM_API_KEY = process.env.REACT_APP_LASTFM_API_KEY;
 const LASTFM_USERNAME = 'bob10234';
-const SPOTIFY_PROFILE = 'https://open.spotify.com/user/bob10234?si=394e0893e56d47e3';
 
 export const NowPlaying = () => {
   const [lastTrack, setLastTrack] = useState<Track | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchLastTrack = async () => {
       try {
-        console.log('Fetching last track...');
-        console.log('API Key:', LASTFM_API_KEY);
-        
         const response = await fetch(
           `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USERNAME}&api_key=${LASTFM_API_KEY}&format=json&limit=1`
         );
@@ -27,8 +25,6 @@ export const NowPlaying = () => {
         if (!response.ok) throw new Error('Failed to fetch');
         
         const data = await response.json();
-        console.log('LastFM Response:', data);
-        
         const track = data.recenttracks.track[0];
         
         setLastTrack({
@@ -47,51 +43,30 @@ export const NowPlaying = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const formatTrackText = (name: string, artist: string) => {
-    const fullText = `${name} - ${artist}`;
-    const lines = fullText.match(/.{1,50}/g) || [fullText]; // Split into chunks of ~50 chars
-    
-    if (lines.length === 1) {
-      return `[${fullText}]`;
-    }
-    
-    return lines.map((line, index) => {
-      // Trim whitespace and add brackets
-      line = line.trim();
-      // Add space at the start for all lines except the first
-      const prefix = index === 0 ? '[' : ' [';
-      return `${prefix}${line}]`;
-    }).join('\n');
-  };
+  const trackText = lastTrack ? `[${lastTrack.name} - ${lastTrack.artist}]` : '';
 
   return (
     <Link 
       to="/jam"
-      className="fixed top-4 right-4 text-white font-mono z-[100] p-2 rounded max-w-[800px] hover:text-blue-400 transition-colors flex flex-col items-end gap-y-2"
+      className="fixed top-4 right-4 z-[100] bg-white/10 backdrop-blur-sm text-white font-mono 
+        hover:bg-white/20 transition-all duration-300 rounded-lg overflow-hidden border border-white/20"
     >
-      {error ? (
-        'Failed to load track info'
-      ) : !lastTrack ? (
-        'Loading...'
-      ) : (
-        <>
-          <div className="whitespace-nowrap">Jam JUST listened to</div>
-          <div
-            className="text-right"
-            style={{
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              whiteSpace: 'normal',
-              maxWidth: '400px',
-            }}
-          >
-            [{lastTrack.name} - {lastTrack.artist}]
+      <div className="px-6 py-3">
+        {error ? (
+          'Failed to load track info'
+        ) : !lastTrack ? (
+          <div>Loading...</div>
+        ) : (
+          <div className="flex flex-col items-end gap-y-1">
+            <div className="text-sm opacity-70">Jam JUST listened to</div>
+            <div className="overflow-hidden relative w-[200px]">
+              <Marquee gradient={false} speed={50}>
+                {trackText}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </Marquee>
+            </div>
           </div>
-        </>
-      )}
+        )}
+      </div>
     </Link>
   );
 }; 
