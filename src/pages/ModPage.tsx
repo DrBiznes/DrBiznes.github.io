@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ReactMarkdown from 'react-markdown';
@@ -21,6 +21,19 @@ const ASCII = {
 
 export const ModPage = () => {
   const { modId } = useParams();
+  const [isExiting, setIsExiting] = useState(false);
+  
+  // Handle scroll after exit animation completes
+  const handleExitComplete = () => {
+    window.scrollTo(0, 0);
+    setIsExiting(false);
+  };
+
+  // Trigger exit animation when modId changes
+  useEffect(() => {
+    setIsExiting(true);
+  }, [modId]);
+
   const mod = modId ? mods[modId] : undefined;
   const { readme, isLoading, error } = useReadme(mod?.readmeUrl ?? '');
   const boxRef = React.useRef<HTMLDivElement>(null);
@@ -28,18 +41,6 @@ export const ModPage = () => {
   if (!mod) {
     return <Navigate to="/404" replace />;
   }
-
-  const drawHorizontalLine = (length: number) => ASCII.horizontal.repeat(length);
-  
-  const padContentLine = (prefix: string, content: string, totalWidth: number) => {
-    const contentSpace = totalWidth - prefix.length - 3; // -3 for the vertical bars and space
-    const paddedContent = content.slice(0, contentSpace).padEnd(contentSpace);
-    return `${ASCII.vertical} ${prefix}${paddedContent} ${ASCII.vertical}`;
-  };
-
-  const getMaxContentWidth = (items: string[]) => {
-    return Math.max(...items.map(item => item.length)) + 4; // +4 for padding
-  };
 
   const wrapText = (text: string, maxWidth: number) => {
     const words = text.split(' ');
@@ -99,13 +100,16 @@ export const ModPage = () => {
   };
 
   return (
-    <AnimatePresence mode="wait">
+    <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
       <motion.div 
-        key={modId} // This ensures animation triggers on mod change
+        key={modId}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
+        exit={{ opacity: 0 }}
+        transition={{ 
+          duration: 0.3,
+          exit: { duration: 0.2 } // Faster exit for smoother transition
+        }}
         className="relative min-h-screen w-full overflow-y-auto font-mono"
       >
         <div 
@@ -226,13 +230,19 @@ export const ModPage = () => {
                             className="text-white hover:text-gray-300 underline" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                          />
+                          >
+                            {props.children}
+                          </a>
                         ),
                         h1: ({node, ...props}) => (
-                          <h1 {...props} className="text-2xl font-bold mt-8 mb-4 first:mt-0 border-b border-white" />
+                          <h1 {...props} className="text-2xl font-bold mt-8 mb-4 first:mt-0 border-b border-white">
+                            {props.children}
+                          </h1>
                         ),
                         h2: ({node, ...props}) => (
-                          <h2 {...props} className="text-xl font-bold mt-6 mb-3 border-b border-white" />
+                          <h2 {...props} className="text-xl font-bold mt-6 mb-3 border-b border-white">
+                            {props.children}
+                          </h2>
                         ),
                         p: ({node, ...props}) => (
                           <p {...props} className="mb-4" />

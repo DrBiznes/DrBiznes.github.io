@@ -19,10 +19,10 @@ export const Home = () => {
         className="relative h-screen z-20 flex flex-col justify-end"
       >
         <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30">
-          <h1 className="text-4xl font-bold text-white mb-4 text-center">
+          <h1 className="text-4xl font-['IBM_Plex_Mono'] font-bold text-white mb-4 text-center">
             Welcome to my website!$!!$!
           </h1>
-          <p className="text-gray-300 text-center">
+          <p className="text-gray-300 font-['IBM_Plex_Mono'] text-center">
             ENGAGE with EVERYTHING by me Jamino EXPLORE my stuff
           </p>
         </div>

@@ -246,9 +246,22 @@ const PhotoSet = ({
 
 export const PhotosPage = () => {
   const { galleryId, setId } = useParams();
+  const [isExiting, setIsExiting] = useState(false);
   const gallery = galleryId ? photoGalleries[galleryId] : undefined;
 
-  React.useEffect(() => {
+  // Handle scroll after exit animation completes
+  const handleExitComplete = () => {
+    window.scrollTo(0, 0);
+    setIsExiting(false);
+  };
+
+  // Trigger exit animation when galleryId changes
+  useEffect(() => {
+    setIsExiting(true);
+  }, [galleryId]);
+
+  // Existing setId scroll behavior
+  useEffect(() => {
     if (setId) {
       const setIndex = gallery?.photoSets.findIndex(set => 
         set.folderId.split('/').pop() === setId
@@ -270,41 +283,47 @@ export const PhotosPage = () => {
   return (
     <div 
       className="relative min-h-screen w-full overflow-y-auto font-mono"
-      key={galleryId}
     >
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        {gallery.photoSets.map((set, index) => (
-          <React.Fragment key={index}>
-            <PhotoSet
-              setIndex={index}
-              title={set.title}
-              description={set.description}
-              photos={set.photos}
-              folderData={{ folderId: set.folderId, photos: set.allPhotos }}
-            />
-            {index < gallery.photoSets.length - 1 && (
-              <motion.div 
-                className="w-full text-center py-8 text-white -mt-20 cursor-pointer relative z-20"
-                whileHover={{ y: [0, -8, 0] }}
-                transition={{ 
-                  repeat: Infinity,
-                  duration: 1.5
-                }}
-                onClick={() => {
-                  const nextSet = document.getElementById(`photo-set-${index + 1}`);
-                  nextSet?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                ↓ Click here for more photos ↓
-              </motion.div>
-            )}
-          </React.Fragment>
-        ))}
-      </motion.div>
+      <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
+        <motion.div
+          key={galleryId}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ 
+            duration: 0.3,
+            exit: { duration: 0.2 }
+          }}
+        >
+          {gallery.photoSets.map((set, index) => (
+            <React.Fragment key={index}>
+              <PhotoSet
+                setIndex={index}
+                title={set.title}
+                description={set.description}
+                photos={set.photos}
+                folderData={{ folderId: set.folderId, photos: set.allPhotos }}
+              />
+              {index < gallery.photoSets.length - 1 && (
+                <motion.div 
+                  className="w-full text-center py-8 text-white -mt-20 cursor-pointer relative z-20"
+                  whileHover={{ y: [0, -8, 0] }}
+                  transition={{ 
+                    repeat: Infinity,
+                    duration: 1.5
+                  }}
+                  onClick={() => {
+                    const nextSet = document.getElementById(`photo-set-${index + 1}`);
+                    nextSet?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  ↓ Click here for more photos ↓
+                </motion.div>
+              )}
+            </React.Fragment>
+          ))}
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 };

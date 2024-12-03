@@ -371,12 +371,12 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         id: 'saint-francisville',
         folderId: 'american-south/saint-francisville',
         title: 'Saint Francisville',
-        description: 'This is where my grandma lives, and my mom grew up. Don\'t worry, we don\'t live on a plantation nor did our ancestors own slaves. At least I\'m pretty sure.',
+        description: 'This is where my grandma lives, and my mom grew up. There sure are a lot of plantations nearby, but don\'t worry, we don\'t live on one.',
         photos: [
           {
             imageUrl: '/photos/american-south/saint-francisville/BackyardSunset.JPG',
             title: 'Backyard Sunset',
-            description: 'The sun sets over my grandma\'s backyard. The clouds look like they\'re on fire.'
+            description: 'Everyone always talks about the Los Angeles sunsets but LA sunsets are better.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/GrandmasGator.JPEG',
@@ -386,12 +386,12 @@ export const photoGalleries: Record<string, PhotoGallery> = {
           {
             imageUrl: '/photos/american-south/saint-francisville/GrandmasSwing.jpeg',
             title: 'Grandmas Swing',
-            description: 'The swing on grandma\'s front porch. I\'ve spent countless hours here just watching the world go by.'
+            description: 'Having a porch with a swing is the american dream.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/OrbWeaverOne.JPEG',
             title: 'Orb Weaver',
-            description: 'These spiders are everywhere in Louisiana. They\'re harmless but they sure know how to make a beautiful web.'
+            description: 'Armies of orb weavers surround the forests of Saint Francisville. I am terrified but they are beautiful.'
           }
         ],
         allPhotos: [
@@ -399,21 +399,25 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             imageUrl: '/photos/american-south/saint-francisville/BackyardSunset.JPG',
             type: 'image',
             title: 'Backyard Sunset',
+            description: 'Everyone always talks about the Los Angeles sunsets but LA sunsets are better.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/GrandmasGator.JPEG',
             type: 'image',
             title: 'Grandmas Gator',
+            description: 'This little guy lives in the pond behind grandma\'s house.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/GrandmasSwing.jpeg',
             type: 'image',
             title: 'Grandmas Swing',
+            description: 'Having a porch with a swing is the american dream.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/OrbWeaverOne.JPEG',
             type: 'image',
             title: 'Orb Weaver One',
+            description: 'Armies of orb weavers surround the forests of Saint Francisville. I am terrified but they are beautiful.'
           },
           {
             imageUrl: '/photos/american-south/saint-francisville/OrbWeaver.mp4',

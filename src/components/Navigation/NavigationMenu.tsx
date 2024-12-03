@@ -11,10 +11,9 @@ const menuData: MenuItem = {
   name: 'me.jamino',
   path: '/',
   children: [
-    { name: 'Beautiful NTD', path: '/transit-database' },
-    { name: 'Thunderegg Records', path: 'https://www.thundereggrecords.com/' },
+    { name: 'Beautiful-NTD', path: '/transit-database' },
     {
-      name: 'Minecraft Mods',
+      name: 'Minecraft-Mods',
       path: '/minecraft-mods',
       children: [
         { name: 'Wynn-Weapon-Bigger', path: '/minecraft-mods/wynn-weapon-bigger' },
@@ -29,12 +28,13 @@ const menuData: MenuItem = {
       name: 'Photos',
       path: '/photos',
       children: [
-        { name: 'National Parks', path: '/photos/national-parks' },
-        { name: 'American South', path: '/photos/american-south' },
+        { name: 'National-Parks', path: '/photos/national-parks' },
+        { name: 'American-South', path: '/photos/american-south' },
         { name: 'Misc', path: '/photos/misc' }
       ]
     },
-    { name: 'Biznes Card', path: '/biznes-card' }
+    { name: 'Thunderegg-Records', path: 'https://www.thundereggrecords.com/' },
+    { name: 'Biznes-Card', path: '/biznes-card' }
   ]
 };
 
@@ -89,13 +89,13 @@ const NavigationItem = ({
             {item.children && level === 0 ? (
               <Link 
                 to={item.path}
-                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-2xl' : 'text-base'}`}
+                className={`font-['IBM_Plex_Mono'] hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-2xl' : 'text-base'}`}
               >
                 {item.name}
               </Link>
             ) : item.children ? (
               <span 
-                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-xl' : 'text-base'}`}
+                className={`font-['IBM_Plex_Mono'] hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} ${level === 0 ? 'text-xl' : 'text-base'}`}
               >
                 {item.name}
               </span>
@@ -104,14 +104,14 @@ const NavigationItem = ({
                 href={item.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} text-base`}
+                className={`font-['IBM_Plex_Mono'] hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} text-base`}
               >
                 {item.name}
               </a>
             ) : (
               <Link 
                 to={item.path} 
-                className={`font-mono hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} text-base`}
+                className={`font-['IBM_Plex_Mono'] hover:text-blue-400 ${visited ? 'text-blue-400' : 'text-white'} text-base`}
               >
                 {item.name}
               </Link>
@@ -138,7 +138,7 @@ const NavigationItem = ({
 
 export const NavigationMenu = () => {
   return (
-    <div className="font-mono pl-2">
+    <div className="font-['IBM_Plex_Mono'] pl-2">
       <NavigationItem item={menuData} />
     </div>
   );

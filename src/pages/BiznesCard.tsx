@@ -31,7 +31,7 @@ interface SocialLink {
 const socialLinks: SocialLink[] = [
   { platform: 'GitHub', url: 'https://github.com/DrBiznes' },
   { platform: 'Twitter', url: 'https://twitter.com/DrBiznez' },
-  { platform: 'LinkedIn', url: 'https://linkedin.com/in/jamino' },
+  { platform: 'LinkedIn', url: 'https://www.linkedin.com/in/jamesfemino/' },
   { platform: 'Discord', url: 'https://discord.gg/jqFF64rXZZ' },
   { platform: 'Email', url: '/email' }
 ];

@@ -322,6 +322,7 @@ export const JamPage = () => {
                     transition={{ duration: 0.3 }}
                   >
                     <iframe
+                      title={`${playlists[selectedPlaylist].name} Spotify Playlist`}
                       src={`${playlists[selectedPlaylist].embedUrl}?utm_source=generator`}
                       width="100%"
                       height="152"

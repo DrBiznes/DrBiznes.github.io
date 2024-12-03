@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Marquee from 'react-fast-marquee';
 
@@ -13,7 +13,6 @@ const LASTFM_USERNAME = 'bob10234';
 export const NowPlaying = () => {
   const [lastTrack, setLastTrack] = useState<Track | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchLastTrack = async () => {
@@ -48,7 +47,7 @@ export const NowPlaying = () => {
   return (
     <Link 
       to="/jam"
-      className="fixed top-4 right-4 z-[100] bg-white/10 backdrop-blur-sm text-white font-mono 
+      className="fixed top-4 right-4 z-[100] bg-white/10 backdrop-blur-sm text-white font-['IBM_Plex_Mono'] 
         hover:bg-white/20 transition-all duration-300 rounded-lg overflow-hidden border border-white/20"
     >
       <div className="px-6 py-3">
