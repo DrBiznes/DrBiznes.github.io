@@ -35,47 +35,47 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         description: 'Very first time entering the lottery for Katmai and we got in. We were so excited. We had no idea what we were getting into. We were not prepared for the bears. We were not prepared for the bears. We were not prepared for the bears.',
         photos: [
           {
-            imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
+            imageUrl: '/photos/national-parks/katmai/NobleBear.JPEG',
             title: 'Noble Bear',
             description: 'Noble bear is a big bear. He is a good bear. He is a noble bear. Look at him stand on that rock.'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
+            imageUrl: '/photos/national-parks/katmai/Iditarod.JPEG',
             title: 'Iditarod',
             description: 'This was us on our way to the airport.'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
+            imageUrl: '/photos/national-parks/katmai/BackwardBear.JPEG',
             title: 'Backwards Bear',
             description: 'Stupid idiot bear doesn\'t realize he\'s facing the wrong way. The fish are on the other side dummy.'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
+            imageUrl: '/photos/national-parks/katmai/TenThousandSmokes.JPEG',
             title: 'Ten Thousand Smokes',
             description: 'Hands down the coolest name for a valley, shoutout to the Sugpiaq people.'
           }
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
+            imageUrl: '/photos/national-parks/katmai/NobleBear.JPEG',
             type: 'image',
             title: 'Noble Bear',
             description: 'Noble bear is a big bear. He is a good bear. He is a noble bear. Look at him stand on that rock.'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
+            imageUrl: '/photos/national-parks/katmai/Iditarod.JPEG',
             type: 'image',
             title: 'Iditarod',
             description: 'A tranquil lake reflecting the surrounding mountains'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
+            imageUrl: '/photos/national-parks/katmai/BackwardBear.JPEG',
             type: 'image',
             title: 'Backward Bear',
             description: 'Stupid idiot bear doesn\'t realize he\'s facing the wrong way. The fish are on the other side dummy.'
           },
           {
-            imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
+            imageUrl: '/photos/national-parks/katmai/TenThousandSmokes.JPEG',
             type: 'image',
             title: 'Ten Thousand Smokes',
             description: 'A breathtaking sunset over the rugged landscape'
