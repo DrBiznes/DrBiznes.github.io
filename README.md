@@ -1,6 +1,6 @@
 # Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Please don't use my last.fm API key for nefarious purposes D:
 
 ## Available Scripts
 
