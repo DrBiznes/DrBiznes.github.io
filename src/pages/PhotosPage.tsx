@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { photoGalleries, PhotoItem } from '../config/photos';
@@ -36,6 +36,28 @@ const PhotoSet = ({
   const [isHoveringAnyPhoto, setIsHoveringAnyPhoto] = useState(false);
   const navigate = useNavigate();
   const { galleryId } = useParams();
+  const [isVisible, setIsVisible] = useState(false);
+  const photoSetRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect(); // Stop observing once visible
+        }
+      },
+      {
+        threshold: 0.1 // Trigger when 10% of the element is visible
+      }
+    );
+
+    if (photoSetRef.current) {
+      observer.observe(photoSetRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   const getRandomOffset = () => {
     return Math.random() > 0.8 ? (Math.random() * 40 - 20) + 'px' : '0px';
@@ -120,82 +142,103 @@ const PhotoSet = ({
     );
   };
 
-  return (
-    <div id={`photo-set-${setIndex}`} className="relative h-screen overflow-hidden" style={{ marginLeft: '250px' }}>
-      <AnimatePresence>
-        <>
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHoveringAnyPhoto ? 0 : 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ delay: 0.2 }}
-            className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-          >
-            <div className="text-white bg-black/90 border border-white max-w-xl">
-              <div className="bg-white/10 px-3 py-1.5 border-b border-white">
-                <span className="text-lg">{title}</span>
-              </div>
-              <div className="p-4 max-w-full">
-                {drawBox('', [description], true)}
-              </div>
-            </div>
-          </motion.div>
+  const textOffset = useMemo(() => ({
+    left: getRandomOffset(),
+    top: getRandomOffset()
+  }), []);
 
-          {photos.map((photo, index) => (
-            <motion.div
-              key={index}
-              style={{
-                ...positions[index].wrapperStyle,
-                zIndex: getZIndex(index),
-                transition: 'z-index 0ms'
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ delay: index * 0.2 }}
-              onMouseEnter={() => {
-                setHoveredIndex(index);
-                setIsHoveringAnyPhoto(true);
-              }}
-              onMouseLeave={() => {
-                setHoveredIndex(null);
-                setIsHoveringAnyPhoto(false);
+  return (
+    <div 
+      ref={photoSetRef}
+      id={`photo-set-${setIndex}`} 
+      className="relative h-screen overflow-hidden" 
+      style={{ marginLeft: '250px' }}
+    >
+      <AnimatePresence>
+        {isVisible && (
+          <>
+            <div 
+              className="text-white text-center py-4 opacity-70 absolute top-4 left-0 right-0 z-10"
+              style={{ 
+                transform: `translate(${textOffset.left}, calc(${textOffset.top} + 1rem))`
               }}
             >
-              <motion.div
-                className="group cursor-pointer"
-                whileHover={{ 
-                  scale: 1.05,
-                  rotate: 0,
-                  transition: { duration: 0.3 }
-                }}
-                onClick={() => handleClick(index)}
-              >
-                <div className="relative">
-                  <img
-                    src={photo.imageUrl}
-                    alt={photo.title}
-                    className="object-cover border-4 border-white shadow-2xl"
-                    style={{ height: '300px', width: '100%' }}
-                  />
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/50
-                             opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  />
+              Click any photo to view the full gallery
+            </div>
+            
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isHoveringAnyPhoto ? 0 : 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ delay: 0.2 }}
+              className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+            >
+              <div className="text-white bg-black/90 border border-white max-w-xl">
+                <div className="bg-white/10 px-3 py-1.5 border-b border-white">
+                  <span className="text-lg">{title}</span>
                 </div>
-                
-                <motion.div 
-                  className="absolute -bottom-20 left-0 right-0 opacity-0 
+                <div className="p-4 max-w-full">
+                  {drawBox('', [description], true)}
+                </div>
+              </div>
+            </motion.div>
+
+            {photos.map((photo, index) => (
+              <motion.div
+                key={index}
+                style={{
+                  ...positions[index].wrapperStyle,
+                  zIndex: getZIndex(index),
+                  transition: 'z-index 0ms'
+                }}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ delay: index * 0.2 }}
+                onMouseEnter={() => {
+                  setHoveredIndex(index);
+                  setIsHoveringAnyPhoto(true);
+                }}
+                onMouseLeave={() => {
+                  setHoveredIndex(null);
+                  setIsHoveringAnyPhoto(false);
+                }}
+              >
+                <motion.div
+                  className="group cursor-pointer"
+                  whileHover={{ 
+                    scale: 1.05,
+                    rotate: 0,
+                    transition: { duration: 0.3 }
+                  }}
+                  onClick={() => handleClick(index)}
+                >
+                  <div className="relative">
+                    <img
+                      src={photo.imageUrl}
+                      alt={photo.title}
+                      className="object-cover border-4 border-white shadow-2xl"
+                      style={{ height: '300px', width: '100%' }}
+                    />
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-b from-black/0 to-black/50
+                             opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
+                  </div>
+                  
+                  <motion.div 
+                    className="absolute -bottom-20 left-0 right-0 opacity-0 
                            group-hover:opacity-100 transition-opacity duration-300
                            bg-black/80 p-2 border border-white max-w-full overflow-hidden"
-                  style={{ width: positions[index].wrapperStyle.width }}
-                >
-                  {drawBox(photo.title, [photo.description], false)}
+                    style={{ width: positions[index].wrapperStyle.width }}
+                  >
+                    {drawBox(photo.title, [photo.description], false)}
+                  </motion.div>
                 </motion.div>
               </motion.div>
-            </motion.div>
-          ))}
-        </>
+            ))}
+          </>
+        )}
       </AnimatePresence>
     </div>
   );
@@ -225,7 +268,10 @@ export const PhotosPage = () => {
   }
 
   return (
-    <div className="relative min-h-screen w-full overflow-y-auto font-mono">
+    <div 
+      className="relative min-h-screen w-full overflow-y-auto font-mono"
+      key={galleryId}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -253,7 +299,7 @@ export const PhotosPage = () => {
                   nextSet?.scrollIntoView({ behavior: 'smooth' });
                 }}
               >
-                ↓ Scroll down for more photos ↓
+                ↓ Click here for more photos ↓
               </motion.div>
             )}
           </React.Fragment>

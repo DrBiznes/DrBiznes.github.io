@@ -32,7 +32,7 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         id: 'katmai',
         folderId: 'national-parks/katmai',
         title: 'Katmai National Park',
-        description: 'Click on any of the photos to view the whole gallery. Very first time entering the lottery for Katmai and we got in. We were so excited. We had no idea what we were getting into. We were not prepared for the bears. We were not prepared for the bears. We were not prepared for the bears.',
+        description: 'Very first time entering the lottery for Katmai and we got in. We were so excited. We had no idea what we were getting into. We were not prepared for the bears. We were not prepared for the bears. We were not prepared for the bears.',
         photos: [
           {
             imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
@@ -60,21 +60,25 @@ export const photoGalleries: Record<string, PhotoGallery> = {
             imageUrl: '/photos/national-parks/katmai/noblebear.jpeg',
             type: 'image',
             title: 'Noble Bear',
+            description: 'Noble bear is a big bear. He is a good bear. He is a noble bear. Look at him stand on that rock.'
           },
           {
             imageUrl: '/photos/national-parks/katmai/iditarod.jpeg',
             type: 'image',
             title: 'Iditarod',
+            description: 'A tranquil lake reflecting the surrounding mountains'
           },
           {
             imageUrl: '/photos/national-parks/katmai/backwardbear.jpeg',
             type: 'image',
             title: 'Backward Bear',
+            description: 'Stupid idiot bear doesn\'t realize he\'s facing the wrong way. The fish are on the other side dummy.'
           },
           {
             imageUrl: '/photos/national-parks/katmai/tenthousandsmokes.jpeg',
             type: 'image',
             title: 'Ten Thousand Smokes',
+            description: 'A breathtaking sunset over the rugged landscape'
           },
           {
             imageUrl: '/photos/national-parks/katmai/CoolestNameForAValley.JPEG',
@@ -131,46 +135,50 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         description: 'Majestic granite cliffs, waterfalls, and scenic vistas captured during Summer 2024',
         photos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
-            title: 'Half Dome at Sunset',
-            description: 'The iconic Half Dome glowing in the golden evening light'
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
+            title: 'Cathedral Lake Loop',
+            description: 'Had the whole lake to ourselves. I saw a family of deer on the way out. They were so cute!!!'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
-            title: 'Yosemite Falls',
-            description: 'The magnificent Yosemite Falls in full summer flow'
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
+            title: 'Just Enough Mist',
+            description: 'Just enough mist for our own personal rainbow.'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/Dome-pinch.JPEG',
-            title: 'Tunnel View Vista',
-            description: 'Classic view of Yosemite Valley with El Capitan and Bridalveil Fall'
+            title: 'Dome Pinch',
+            description: 'He tried to squish Half Dome between his fingers. How original.'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/InAwe.JPEG',
-            title: 'Valley Meadow',
-            description: 'Summer wildflowers blooming in a peaceful Yosemite Valley meadow'
+            title: 'In Awe',
+            description: 'Vernal falls never disappoints. Except for the day we went.'
           }
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
-            type: 'image',
-            title: 'Half Dome at Sunset',
-          },
-          {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/CathedralLakeLoop.JPEG',
             type: 'image',
-            title: 'Yosemite Falls',
+            title: 'Cathedral Lake Loop',
+            description: 'Had the whole lake to ourselves. I saw a family of deer on the way out. They were so cute!!!'
+          },
+          {
+            imageUrl: '/photos/national-parks/yosemite/summer-2024/JustEnoughMist.JPEG',
+            type: 'image',
+            title: 'Just Enough Mist',
+            description: 'Just enough mist for our own personal rainbow.'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/Dome-pinch.JPEG',
             type: 'image',
-            title: 'Tunnel View Vista',
+            title: 'Dome Pinch',
+            description: 'He tried to squish Half Dome between his fingers. How original.'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/InAwe.JPEG',
             type: 'image',
-            title: 'Valley Meadow',
+            title: 'In Awe',
+            description: 'Vernal falls never disappoints. Except for the day we went.'
           },
           {
             imageUrl: '/photos/national-parks/yosemite/summer-2024/EveningDome.JPEG',
@@ -193,51 +201,80 @@ export const photoGalleries: Record<string, PhotoGallery> = {
         id: 'yosemite-winter-2023',
         folderId: 'national-parks/yosemite/winter-2023',
         title: 'Yosemite Winter 2023',
-        description: 'The dramatic beauty of Yosemite Valley transformed by winter snow and ice',
+        description: 'My whole life I\'ve wanted to see Yosemite covered in snow. Well, I finally go in the winter and the snow melts one day after we get there. I guess I\'ll just have to go back again.',
         photos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/frozen-falls.jpeg',
-            title: 'Frozen Yosemite Falls',
-            description: 'Yosemite Falls partially frozen during winter conditions'
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/FilledMyBottle.JPG',
+            title: 'Filled My Bottle',
+            description: 'Dipped my water bottle in the creek to fill it up. The ranger told me if I drank it, I would die. I did not listen.'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/snow-valley.jpeg',
-            title: 'Snow-covered Valley',
-            description: 'Yosemite Valley blanketed in fresh winter snow'
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/Pohono.JPEG',
+            title: 'Pohono',
+            description: 'Pohono mean Spirit of the puffing wind. The wind bellows and roars against Bridalveil Falls so much that the waterfall sometimes flows up.'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/winter-mirror.jpeg',
-            title: 'Winter Mirror Lake',
-            description: 'Half Dome reflected in the still waters of Mirror Lake'
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/WorstPhotoScanEver.JPG',
+            title: 'Worst Photo Scan Ever',
+            description: 'Good luck trying to figure out where this is Georainbolt'
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/frost-meadow.jpeg',
-            title: 'Frosty Meadow',
-            description: 'Cook\'s Meadow on a crisp winter morning'
+            imageUrl: '/photos/national-parks/yosemite/winter-2023/upper-falls.JPEG',
+            title: 'Upper Falls',
+            description: 'Only a tiny trickle of water flowing down upper Yosemite Falls :('
           }
         ],
         allPhotos: [
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/frozen-falls.jpeg',
-            title: 'Frozen Yosemite Falls',
-            description: 'Yosemite Falls partially frozen during winter conditions'
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/FilledMyBottle.JPG",
+            "type": "image",
+            "title": "Filled My Bottle",
+            "description": "Dipped my water bottle in the creek to fill it up. The ranger told me if I drank it, I would die. I did not listen."
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/snow-valley.jpeg',
-            title: 'Snow-covered Valley',
-            description: 'Yosemite Valley blanketed in fresh winter snow'
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/Pohono.JPEG",
+            "type": "image",
+            "title": "Pohono",
+            "description": "Pohono mean Spirit of the puffing wind. The wind bellows and roars against Bridalveil Falls so much that the waterfall sometimes flows up."
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/winter-mirror.jpeg',
-            title: 'Winter Mirror Lake',
-            description: 'Half Dome reflected in the still waters of Mirror Lake'
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/WorstPhotoScanEver.JPG",
+            "type": "image",
+            "title": "Worst Photo Scan Ever",
+            "description": "Good luck trying to figure out where this is Georainbolt"
           },
           {
-            imageUrl: '/photos/national-parks/yosemite/winter-2023/frost-meadow.jpeg',
-            title: 'Frosty Meadow',
-            description: 'Cook\'s Meadow on a crisp winter morning'
-          }
-        ]
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/upper-falls.JPEG",
+            "type": "image",
+            "title": "Upper Falls",
+            "description": "Only a tiny trickle of water flowing down upper Yosemite Falls :("
+          },
+          {
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/LookAtTheDummyInTheBerryHat.jpg",
+            "type": "image",
+            "title": "Look At The Dummy In The Berry Hat",
+          },
+          {
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/PuffingWind.JPG",
+            "type": "image",
+            "title": "Puffing Wind",
+          },
+          {
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/distant-falls.JPEG",
+            "type": "image",
+            "title": "Distant Falls",
+          },
+          {
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/secunda.JPEG",
+            "type": "image",
+            "title": "Secunda",
+          },
+          {
+            "imageUrl": "/photos/national-parks/yosemite/winter-2023/skyFalling.JPG",
+            "type": "image",
+            "title": "Sky Falling",
+          },
+        ]        
       }
     ]
   },
