@@ -51,20 +51,20 @@ export const NowPlaying = () => {
         hover:bg-white/20 transition-all duration-300 rounded-lg overflow-hidden border border-white/20"
     >
       <div className="px-6 py-3">
-        {error ? (
-          'Failed to load track info'
-        ) : !lastTrack ? (
-          <div>Loading...</div>
-        ) : (
-          <div className="flex flex-col items-end gap-y-1">
-            <div className="text-sm opacity-70">Jam JUST listened to</div>
-            <div className="overflow-hidden relative w-[200px]">
+        <div className="flex flex-col items-end gap-y-1">
+          <div className="text-sm opacity-70">Jam JUST listened to</div>
+          <div className="overflow-hidden relative w-[200px]">
+            {error ? (
+              <span className="text-red-400">Failed to load track info</span>
+            ) : !lastTrack ? (
+              <span>Loading...</span>
+            ) : (
               <Marquee gradient={false} speed={50}>
                 {trackText}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </Marquee>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </Link>
   );
