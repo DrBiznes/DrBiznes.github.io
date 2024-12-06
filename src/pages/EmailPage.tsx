@@ -81,15 +81,15 @@ export const EmailPage = () => {
           animate={{ scale: 1, rotate: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
         >
-          <pre className="mb-4">
-            {`${ASCII.topLeft}${ASCII.horizontal.repeat(50)}${ASCII.topRight}
-${ASCII.vertical}                Send me an email!                 ${ASCII.vertical}
-${ASCII.bottomLeft}${ASCII.horizontal.repeat(50)}${ASCII.bottomRight}`}
+          <pre className="mb-4 flex justify-center leading-4 -ml-[1px]">
+            {`${ASCII.topLeft}${ASCII.horizontal.repeat(58)}${ASCII.topRight}
+${ASCII.vertical}                    Send me an email!                     ${ASCII.vertical}
+${ASCII.bottomLeft}${ASCII.horizontal.repeat(58)}${ASCII.bottomRight}`}
           </pre>
 
           <motion.form
             onSubmit={handleSubmit}
-            className="space-y-4 pl-5"
+            className="space-y-4"
             initial="hidden"
             animate="visible"
             variants={{

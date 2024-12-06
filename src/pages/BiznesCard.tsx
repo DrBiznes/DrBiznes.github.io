@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import { Water } from '../components/Water/Water';
 import { Link } from 'react-router-dom';
+import './BiznesCard.css';
 
 const ASCII = {
   topLeft: '┌',
@@ -72,13 +73,13 @@ const drawBusinessCard = (content: string[]) => {
 
   return (
     <div className="font-mono">
-      <pre>{topLine}</pre>
+      <pre style={{ margin: 0 }}>{topLine}</pre>
       {content.map((line, i) => (
-        <pre key={i}>
+        <pre key={i} style={{ margin: 0 }}>
           {BORDER.vertical} {line.padEnd(width - 2)} {BORDER.vertical}
         </pre>
       ))}
-      <pre>{bottomLine}</pre>
+      <pre style={{ margin: 0 }}>{bottomLine}</pre>
     </div>
   );
 };
@@ -95,11 +96,10 @@ export const BiznesCard = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white relative"
+        className="biznes-card-container"
       >
-        <div className="flex flex-col items-center space-y-8 p-8">
-          {/* Business card with double-line border */}
-          <div className="whitespace-pre text-left w-[800px]">
+        <div className="content-wrapper">
+          <div className="business-card">
             {drawBusinessCard([
               '  $$$$$$$$\\ $$$$$$$\\                    James P. Femino',
               '  \\__$$  __|$$  __$$\\                   Treasurer',
@@ -112,8 +112,7 @@ export const BiznesCard = () => {
             ])}
           </div>
 
-          {/* Original ASCII box replaced with new About section */}
-          <div className="whitespace-pre text-left w-[500px]">
+          <div className="about-section">
             <pre>
               {drawBox('About', [
                 'I\'m currently a senior pursuing a B.S in Public',
@@ -131,13 +130,13 @@ export const BiznesCard = () => {
             </pre>
           </div>
 
-          <div className="flex flex-wrap justify-center gap-3 w-full mt-4">
+          <div className="social-links">
             {socialLinks.map(link => (
               link.platform === 'Email' ? (
                 <Link
                   key={link.platform}
                   to={link.url}
-                  className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+                  className="social-link"
                 >
                   [{link.platform}]
                 </Link>
@@ -147,7 +146,7 @@ export const BiznesCard = () => {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+                  className="social-link"
                 >
                   [{link.platform}]
                 </a>
