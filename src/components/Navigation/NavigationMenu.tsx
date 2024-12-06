@@ -17,7 +17,7 @@ const menuData: MenuItem = {
       children: [
         { name: 'Beautiful-NTD', path: '/transit-database' },
         { 
-          name: 'UO ALC Wrapped 2024', 
+          name: 'UO-ALC-Wrapped-2024', 
           path: 'https://alc.jamino.me' 
         }
       ]
@@ -63,21 +63,23 @@ const NavigationItem = ({
 }) => {
   const [visited, setVisited] = useState(false);
 
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent) => {
     if (item.children) {
+      if (item.name === 'me.jamino') {
+        setOpenFolders(currentFolders => 
+          currentFolders.includes(item.name) ? [] : [item.name]
+        );
+        setVisited(true);
+        return;
+      }
+      
+      e.stopPropagation();
       setOpenFolders((currentFolders: string[]) => {
         if (currentFolders.includes(item.name)) {
-          // If closing me.jamino (root folder), clear all folders
-          if (item.name === 'me.jamino') {
-            return [];
-          }
-          // Otherwise just close this folder
           return currentFolders.filter((folder: string) => folder !== item.name);
         } else {
-          // Open this folder, but close any siblings at level 1
           const newFolders = [...currentFolders];
           if (level === 1) {
-            // Find and remove any level 1 folders (Photos or Minecraft-Mods)
             const level1Folders = menuData.children?.map(child => child.name) || [];
             return [...newFolders.filter(folder => !level1Folders.includes(folder)), item.name];
           }

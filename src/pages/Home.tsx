@@ -2,7 +2,8 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Water } from '../components/Water/Water';
 import { Helmet } from 'react-helmet-async';
-import { useAsciiText, deltaCorpsPriest1 } from 'react-ascii-text';
+import { useAsciiText, deltaCorpsPriest1, alligator } from 'react-ascii-text';
+import { SubText } from '../components/SubText/SubText';
 
 export const Home = () => {
   useEffect(() => {
@@ -16,9 +17,9 @@ export const Home = () => {
     font: deltaCorpsPriest1,
     text: ["Welcome To", "Jamino Online"],
     animationInterval: 400,
-    animationDelay: 600,
+    animationDelay: 1000,
     animationDirection: "down",
-    animationCharacters: "▒░█",
+    animationCharacters: "▒ ░ █",
     animationLoop: true,
     animationCharacterSpacing: 0,
     animationSpeed: 30,
@@ -77,11 +78,12 @@ export const Home = () => {
           exit={{ opacity: 0 }}
           className="relative h-screen z-20 flex flex-col items-center justify-center"
         >
-          <div className="overflow-hidden">
+          <div className="overflow-hidden translate-y-[-200px] flex flex-col items-center gap-8">
             <pre 
               ref={asciiTextRef}
               className="text-white z-30 transform scale-[0.9] whitespace-pre"
             ></pre>
+            <SubText />
           </div>
           <Water />
         </motion.div>
