@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { photoGalleries, PhotoItem } from '../config/photos';
 
 interface FolderData {
@@ -255,10 +256,13 @@ export const PhotosPage = () => {
     setIsExiting(false);
   };
 
-  // Trigger exit animation when galleryId changes
+  // Scroll to top when gallery changes
   useEffect(() => {
+    if (!setId) {
+      window.scrollTo(0, 0);
+    }
     setIsExiting(true);
-  }, [galleryId]);
+  }, [galleryId, setId]);
 
   // Existing setId scroll behavior
   useEffect(() => {
@@ -280,10 +284,74 @@ export const PhotosPage = () => {
     return <Navigate to="/404" replace />;
   }
 
+  const currentSet = setId 
+    ? gallery.photoSets.find(set => set.folderId.split('/').pop() === setId)
+    : undefined;
+
+  const pageTitle = currentSet 
+    ? `${currentSet.title} - ${gallery.title} | Jamino.me`
+    : `${gallery.title} | Jamino.me`;
+    
+  const pageDescription = currentSet 
+    ? currentSet.description
+    : gallery.description;
+
+  // Create the schema data outside of the Helmet component
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    "name": pageTitle,
+    "description": pageDescription,
+    "author": {
+      "@type": "Person",
+      "name": "James Femino",
+      "alternateName": "Jamino"
+    },
+    "image": currentSet?.photos.map(photo => ({
+      "@type": "ImageObject",
+      "name": photo.title,
+      "description": photo.description,
+      "contentUrl": `https://www.jamino.me${photo.imageUrl}`
+    })) || []
+  };
+
   return (
-    <div 
-      className="relative min-h-screen w-full overflow-y-auto font-mono"
-    >
+    <div className="relative min-h-screen w-full overflow-y-auto font-mono">
+      <Helmet>
+        <title>{pageTitle}</title>
+        <meta name="description" content={pageDescription} />
+        
+        {/* Open Graph / Facebook */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="og:description" content={pageDescription} />
+        {currentSet?.photos[0]?.imageUrl && (
+          <meta property="og:image" content={`https://www.jamino.me${currentSet.photos[0].imageUrl}`} />
+        )}
+        
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={pageTitle} />
+        <meta name="twitter:description" content={pageDescription} />
+        {currentSet?.photos[0]?.imageUrl && (
+          <meta name="twitter:image" content={`https://www.jamino.me${currentSet.photos[0].imageUrl}`} />
+        )}
+        
+        {/* Keywords */}
+        <meta name="keywords" content={`James Femino photography, Jamino photos, ${gallery.title}, ${currentSet?.title || ''}, travel photography, national parks photography`} />
+        
+        {/* Canonical URL */}
+        <link 
+          rel="canonical" 
+          href={`https://www.jamino.me/photos/${galleryId}${setId ? `/${setId}` : ''}`} 
+        />
+
+        {/* Schema.org markup for Google */}
+        <script type="application/ld+json">
+          {JSON.stringify(schemaData)}
+        </script>
+      </Helmet>
+
       <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
         <motion.div
           key={galleryId}
