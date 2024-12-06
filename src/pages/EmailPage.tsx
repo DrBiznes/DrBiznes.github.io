@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
+import { Helmet } from 'react-helmet-async';
 import { Water } from '../components/Water/Water';
 
 const ASCII = {
@@ -63,87 +64,93 @@ export const EmailPage = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen w-full flex flex-col items-center pt-20 font-mono text-white relative"
-    >
+    <>
+      <Helmet>
+        <title>Contact Me | Send an Email</title>
+        <meta name="description" content="Get in touch with me through this contact form. I'll get back to you as soon as possible!" />
+      </Helmet>
       <motion.div
-        className="w-[500px] p-8"
-        initial={{ scale: 0.8, rotate: -10 }}
-        animate={{ scale: 1, rotate: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="min-h-screen w-full flex flex-col items-center pt-20 font-mono text-white relative"
       >
-        <pre className="mb-4">
-          {`${ASCII.topLeft}${ASCII.horizontal.repeat(50)}${ASCII.topRight}
+        <motion.div
+          className="w-[500px] p-8"
+          initial={{ scale: 0.8, rotate: -10 }}
+          animate={{ scale: 1, rotate: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+        >
+          <pre className="mb-4">
+            {`${ASCII.topLeft}${ASCII.horizontal.repeat(50)}${ASCII.topRight}
 ${ASCII.vertical}                Send me an email!                 ${ASCII.vertical}
 ${ASCII.bottomLeft}${ASCII.horizontal.repeat(50)}${ASCII.bottomRight}`}
-        </pre>
+          </pre>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          className="space-y-4 pl-5"
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.2,
+          <motion.form
+            onSubmit={handleSubmit}
+            className="space-y-4 pl-5"
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.2,
+                },
               },
-            },
-          }}
-        >
-          {(['name', 'email', 'subject', 'message'] as FormField[]).map((field) => (
-            <motion.div
-              key={field}
+            }}
+          >
+            {(['name', 'email', 'subject', 'message'] as FormField[]).map((field) => (
+              <motion.div
+                key={field}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { opacity: 1, y: 0 },
+                }}
+              >
+                {field !== 'message' ? (
+                  <input
+                    type={field === 'email' ? 'email' : 'text'}
+                    placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
+                    value={formData[field]}
+                    onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
+                    className="w-full bg-transparent border border-white p-2 text-white font-mono"
+                    required
+                  />
+                ) : (
+                  <textarea
+                    placeholder="Your Message"
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-transparent border border-white p-2 text-white font-mono h-32 resize-y max-h-[50vh]"
+                    required
+                  />
+                )}
+              </motion.div>
+            ))}
+            <motion.button
+              type="submit"
+              className="w-full border border-white px-4 py-2 hover:bg-white/10 transition-colors"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 1, y: 0 },
               }}
             >
-              {field !== 'message' ? (
-                <input
-                  type={field === 'email' ? 'email' : 'text'}
-                  placeholder={`Your ${field.charAt(0).toUpperCase() + field.slice(1)}`}
-                  value={formData[field]}
-                  onChange={(e) => setFormData({ ...formData, [field]: e.target.value })}
-                  className="w-full bg-transparent border border-white p-2 text-white font-mono"
-                  required
-                />
-              ) : (
-                <textarea
-                  placeholder="Your Message"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-transparent border border-white p-2 text-white font-mono h-32 resize-y max-h-[50vh]"
-                  required
-                />
-              )}
-            </motion.div>
-          ))}
-          <motion.button
-            type="submit"
-            className="w-full border border-white px-4 py-2 hover:bg-white/10 transition-colors"
-            variants={{
-              hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
-            }}
-          >
-            [Send Message]
-          </motion.button>
-        </motion.form>
+              [Send Message]
+            </motion.button>
+          </motion.form>
 
-        {status && (
-          <div className="mt-4 text-center pl-6">
-            {status}
-          </div>
-        )}
+          {status && (
+            <div className="mt-4 text-center pl-6">
+              {status}
+            </div>
+          )}
+        </motion.div>
+        <Water />
       </motion.div>
-      <Water />
-    </motion.div>
+    </>
   );
 };
 

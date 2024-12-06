@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { Water } from '../components/Water/Water';
 
 const NotFound = () => {
@@ -12,27 +13,34 @@ const NotFound = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="min-h-screen flex flex-col items-center justify-center text-white font-mono"
-      >
-        <div className="flex flex-col items-center space-y-8">
-          <img
-            src="/assets/404.jpg"
-            alt="404 illustration"
-            className="w-64 h-64 object-contain"
-          />
-          <div className="text-center space-y-2">
-            <h1 className="text-4xl font-bold">404</h1>
-            <p className="text-xl">"I died" - Car</p>
+    <>
+      <Helmet>
+        <title>404 - Page Not Found | DrBiznes</title>
+        <meta name="description" content="Oops! The page you're looking for doesn't exist." />
+      </Helmet>
+
+      <div className="relative min-h-screen">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="min-h-screen flex flex-col items-center justify-center text-white font-mono"
+        >
+          <div className="flex flex-col items-center space-y-8">
+            <img
+              src="/assets/404.jpg"
+              alt="404 illustration"
+              className="w-64 h-64 object-contain"
+            />
+            <div className="text-center space-y-2">
+              <h1 className="text-4xl font-bold">404</h1>
+              <p className="text-xl">"I died" - Car</p>
+            </div>
           </div>
-        </div>
-        <Water />
-      </motion.div>
-    </div>
+          <Water />
+        </motion.div>
+      </div>
+    </>
   );
 };
 

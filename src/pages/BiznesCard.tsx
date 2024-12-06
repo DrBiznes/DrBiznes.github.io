@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 import { Water } from '../components/Water/Water';
 import { Link } from 'react-router-dom';
 
@@ -84,72 +85,79 @@ const drawBusinessCard = (content: string[]) => {
 
 export const BiznesCard = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white relative"
-    >
-      <div className="flex flex-col items-center space-y-8 p-8">
-        {/* Business card with double-line border */}
-        <div className="whitespace-pre text-left w-[800px]">
-          {drawBusinessCard([
-            '  $$$$$$$$\\ $$$$$$$\\                    James P. Femino',
-            '  \\__$$  __|$$  __$$\\                   Treasurer',
-            '     $$ |   $$ |  $$ |',
-            '     $$ |   $$$$$$$  |',
-            '     $$ |   $$  __$$<                   Thunderegg Records, Non Profit',
-            '     $$ |   $$ |  $$ |                  Eugene, Oregon',
-            '     $$ |   $$ |  $$ |',
-            '     \\__|   \\__|  \\__|         One of the worlds top 3 problem solvers'
-          ])}
-        </div>
-
-        {/* Original ASCII box replaced with new About section */}
-        <div className="whitespace-pre text-left w-[500px]">
-          <pre>
-            {drawBox('About', [
-              'I\'m currently a senior pursuing a B.S in Public',
-              'Policy Planning and Management at The University of',
-              'Oregon with a minor in Sustainable Business.',
-              '',
-              'I barely know anything about technology, I just',
-              'make this stuff as a hobby. My main interest is',
-              'trains...',
-              '',
-              'Like seriously, trains are my thing. I\'ll stay up',
-              'for 50 hours straight learning about locomotives',
-              'which is probably why I\'m one of the top 3 problem solvers.'
+    <>
+      <Helmet>
+        <title>Biznes Card | James P. Femino</title>
+        <meta name="description" content="Digital business card for James P. Femino, One of the worlds top 3 problem solvers" />
+      </Helmet>
+      
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="min-h-screen w-full flex flex-col items-center justify-center font-mono text-white relative"
+      >
+        <div className="flex flex-col items-center space-y-8 p-8">
+          {/* Business card with double-line border */}
+          <div className="whitespace-pre text-left w-[800px]">
+            {drawBusinessCard([
+              '  $$$$$$$$\\ $$$$$$$\\                    James P. Femino',
+              '  \\__$$  __|$$  __$$\\                   Treasurer',
+              '     $$ |   $$ |  $$ |',
+              '     $$ |   $$$$$$$  |',
+              '     $$ |   $$  __$$<                   Thunderegg Records, Non Profit',
+              '     $$ |   $$ |  $$ |                  Eugene, Oregon',
+              '     $$ |   $$ |  $$ |',
+              '     \\__|   \\__|  \\__|         One of the worlds top 3 problem solvers'
             ])}
-          </pre>
-        </div>
+          </div>
 
-        <div className="flex flex-wrap justify-center gap-3 w-full mt-4">
-          {socialLinks.map(link => (
-            link.platform === 'Email' ? (
-              <Link
-                key={link.platform}
-                to={link.url}
-                className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
-              >
-                [{link.platform}]
-              </Link>
-            ) : (
-              <a
-                key={link.platform}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
-              >
-                [{link.platform}]
-              </a>
-            )
-          ))}
+          {/* Original ASCII box replaced with new About section */}
+          <div className="whitespace-pre text-left w-[500px]">
+            <pre>
+              {drawBox('About', [
+                'I\'m currently a senior pursuing a B.S in Public',
+                'Policy Planning and Management at The University of',
+                'Oregon with a minor in Sustainable Business.',
+                '',
+                'I barely know anything about technology, I just',
+                'make this stuff as a hobby. My main interest is',
+                'trains...',
+                '',
+                'Like seriously, trains are my thing. I\'ll stay up',
+                'for 50 hours straight learning about locomotives',
+                'which is probably why I\'m one of the top 3 problem solvers.'
+              ])}
+            </pre>
+          </div>
+
+          <div className="flex flex-wrap justify-center gap-3 w-full mt-4">
+            {socialLinks.map(link => (
+              link.platform === 'Email' ? (
+                <Link
+                  key={link.platform}
+                  to={link.url}
+                  className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+                >
+                  [{link.platform}]
+                </Link>
+              ) : (
+                <a
+                  key={link.platform}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3 py-1 border border-white hover:bg-white/10 transition-colors"
+                >
+                  [{link.platform}]
+                </a>
+              )
+            ))}
+          </div>
         </div>
-      </div>
-      <Water />
-    </motion.div>
+        <Water />
+      </motion.div>
+    </>
   );
 };
 
