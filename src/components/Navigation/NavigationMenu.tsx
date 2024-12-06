@@ -11,7 +11,17 @@ const menuData: MenuItem = {
   name: 'me.jamino',
   path: '/',
   children: [
-    { name: 'Beautiful-NTD', path: '/transit-database' },
+    {
+      name: 'Web-Apps',
+      path: '/web-apps',
+      children: [
+        { name: 'Beautiful-NTD', path: '/transit-database' },
+        { 
+          name: 'UO ALC Wrapped 2024', 
+          path: 'https://alc.jamino.me' 
+        }
+      ]
+    },
     {
       name: 'Minecraft-Mods',
       path: '/minecraft-mods',
