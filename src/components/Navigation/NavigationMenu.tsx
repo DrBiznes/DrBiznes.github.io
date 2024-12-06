@@ -41,21 +41,44 @@ const menuData: MenuItem = {
 const NavigationItem = ({ 
   item, 
   level = 0, 
-  isLastChild = false 
+  isLastChild = false,
+  openFolders,
+  setOpenFolders
 }: { 
   item: MenuItem; 
   level?: number;
   isLastChild?: boolean;
+  openFolders: string[];
+  setOpenFolders: React.Dispatch<React.SetStateAction<string[]>>;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const [visited, setVisited] = useState(false);
 
   const handleClick = () => {
     if (item.children) {
-      setIsOpen(!isOpen);
+      setOpenFolders((currentFolders: string[]) => {
+        if (currentFolders.includes(item.name)) {
+          // If closing me.jamino (root folder), clear all folders
+          if (item.name === 'me.jamino') {
+            return [];
+          }
+          // Otherwise just close this folder
+          return currentFolders.filter((folder: string) => folder !== item.name);
+        } else {
+          // Open this folder, but close any siblings at level 1
+          const newFolders = [...currentFolders];
+          if (level === 1) {
+            // Find and remove any level 1 folders (Photos or Minecraft-Mods)
+            const level1Folders = menuData.children?.map(child => child.name) || [];
+            return [...newFolders.filter(folder => !level1Folders.includes(folder)), item.name];
+          }
+          return [...newFolders, item.name];
+        }
+      });
     }
     setVisited(true);
   };
+
+  const isOpen = openFolders.includes(item.name);
 
   return (
     <div className="relative">
@@ -128,6 +151,8 @@ const NavigationItem = ({
               item={child} 
               level={level + 1}
               isLastChild={index === item.children!.length - 1}
+              openFolders={openFolders}
+              setOpenFolders={setOpenFolders}
             />
           ))}
         </div>
@@ -137,9 +162,15 @@ const NavigationItem = ({
 };
 
 export const NavigationMenu = () => {
+  const [openFolders, setOpenFolders] = useState<string[]>(['me.jamino']);
+
   return (
     <div className="font-['IBM_Plex_Mono'] pl-2">
-      <NavigationItem item={menuData} />
+      <NavigationItem 
+        item={menuData} 
+        openFolders={openFolders}
+        setOpenFolders={setOpenFolders}
+      />
     </div>
   );
 };
