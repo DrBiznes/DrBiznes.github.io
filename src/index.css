@@ -34,3 +34,23 @@ code {
   position: fixed;
   width: 100%;
 }
+
+/* ASCII Text Styles */
+pre {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-family: monospace;
+  white-space: pre;
+  clip-path: inset(0);
+}
+
+.ascii-text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  height: fit-content;
+  position: relative;
+}

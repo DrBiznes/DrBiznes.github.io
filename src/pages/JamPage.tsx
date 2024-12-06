@@ -225,9 +225,9 @@ export const JamPage = () => {
     <>
       <Helmet>
         <title>Jam Page</title>
-        <meta name="description" content="My favorite playlists and music statistics" />
+        <meta name="description" content="My favorite playlists and spotify stats" />
         <meta property="og:title" content="Jam Page" />
-        <meta property="og:description" content="My favorite playlists and music statistics" />
+        <meta property="og:description" content="My favorite playlists and spotify stats" />
         <meta property="og:type" content="website" />
       </Helmet>
       <motion.div

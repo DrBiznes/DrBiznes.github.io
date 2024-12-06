@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Water } from '../components/Water/Water';
 import { Helmet } from 'react-helmet-async';
+import { useAsciiText, deltaCorpsPriest1 } from 'react-ascii-text';
 
 export const Home = () => {
   useEffect(() => {
@@ -10,6 +11,18 @@ export const Home = () => {
       document.body.classList.remove('no-scroll');
     };
   }, []);
+
+  const asciiTextRef = useAsciiText({
+    font: deltaCorpsPriest1,
+    text: ["Welcome To", "Jamino Online"],
+    animationInterval: 400,
+    animationDelay: 600,
+    animationDirection: "down",
+    animationCharacters: "▒░█",
+    animationLoop: true,
+    animationCharacterSpacing: 0,
+    animationSpeed: 30,
+  }) as React.RefObject<HTMLPreElement>;
 
   return (
     <>
@@ -62,15 +75,13 @@ export const Home = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="relative h-screen z-20 flex flex-col justify-end"
+          className="relative h-screen z-20 flex flex-col items-center justify-center"
         >
-          <div className="absolute top-2 left-1/2 -translate-x-1/2 z-30">
-            <h1 className="text-4xl font-['IBM_Plex_Mono'] font-bold text-white mb-4 text-center">
-              Welcome to my website!$!!$!
-            </h1>
-            <p className="text-gray-300 font-['IBM_Plex_Mono'] text-center">
-              ENGAGE with EVERYTHING by me Jamino EXPLORE my stuff
-            </p>
+          <div className="overflow-hidden">
+            <pre 
+              ref={asciiTextRef}
+              className="text-white z-30 transform scale-[0.9] whitespace-pre"
+            ></pre>
           </div>
           <Water />
         </motion.div>
