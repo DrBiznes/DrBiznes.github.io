@@ -12,19 +12,30 @@ const menuData: MenuItem = {
   path: '/',
   children: [
     {
-      name: 'Web-Apps',
-      path: '/web-apps',
+      name: 'Web-Works',
+      path: '/web-works',
       children: [
         { name: 'Beautiful-NTD', path: '/transit-database' },
-        { 
-          name: 'UO-ALC-Wrapped-2024', 
-          path: 'https://alc.jamino.me' 
-        }
+        { name: 'Route-67', path: 'https://route67.jamino.me' },
+        { name: "Zaamurets", path: "https://zaamurets.jamino.me" },
+        { name: 'Tracy-Lane-Portfolio', path: 'https://tracylane.work' },
+      ]
+    },
+    {
+      name: 'Games',
+      path: '/games',
+      children: [
+        { name: '100-Women', path: 'https://100.jamino.me' },
+        { name: 'Steam-Gauge', path: 'https://gauge.jamino.me' },
+        { name: 'Location-Scout', path: 'https://scout.jamino.me' },
+        
+
       ]
     },
     {
       name: 'Minecraft-Mods',
       path: '/minecraft-mods',
+
       children: [
         { name: 'Wynn-Weapon-Bigger', path: '/minecraft-mods/wynn-weapon-bigger' },
         { name: 'WynnVista', path: '/minecraft-mods/wynnvista' },
@@ -43,7 +54,16 @@ const menuData: MenuItem = {
         { name: 'Misc', path: '/photos/misc' }
       ]
     },
-    { name: 'Thunderegg-Records', path: 'https://www.thundereggrecords.com/' },
+    { 
+      name: 'Music', 
+      path: '/music',
+      children: [
+        { name: 'The-Stoning', path: 'https://www.thestoning.us/' },
+        { name: 'Thunderegg-Records', path: 'https://www.thundereggrecords.com/' },
+        { name: 'UO-ALC-Wrapped-2024', path: 'https://alc.jamino.me' },
+        { name: 'Jam-Page', path: '/jam' },
+      ]
+    },
     { name: 'Biznes-Card', path: '/biznes-card' }
   ]
 };
